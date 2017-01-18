@@ -1,0 +1,118 @@
+#!/bin/bash
+
+function prep ()
+{
+	echo "Package $ABUILD_PKG_NAME using default prep"
+}
+
+function configure ()
+{
+	echo "Package $ABUILD_PKG_NAME using default configure"
+}
+
+function build ()
+{
+	echo "Package $ABUILD_PKG_NAME using default build"
+}
+
+function install ()
+{
+	echo "Package $ABUILD_PKG_NAME using default install"
+}
+
+function package ()
+{
+	echo "Package $ABUILD_PKG_NAME using default package"
+	echo "Creating tarball from $PKG_INSTALL_DIR ..."
+	cd $PKG_INSTALL_DIR
+	echo "pwd: "
+	pwd
+	# This won't pick up any hidden files, not sure we need to?
+	tar -cvJf $PKG_INSTALL_DIR.tar.xz *
+	cd -
+}
+
+function clean ()
+{
+	echo "Package $ABUILD_PKG_NAME using default clean"
+
+	if [ -d "$PKG_INSTALL_DIR" ]; then
+		echo "Removing $PKG_INSTALL_DIR"
+		rm -rf "$PKG_INSTALL_DIR" || exit 1
+	fi
+}
+
+function process_command_sequence ()
+{
+	case $ABUILD_PKG_COMMAND in
+	prep)
+		prep || exit 1
+		;;
+	configure)
+		prep || exit 1
+		configure || exit 1
+		;;
+	build)
+		prep || exit 1
+		configure || exit 1
+		build || exit 1
+		;;
+	install)
+		prep || exit 1
+		configure || exit 1
+		build || exit 1
+		install || exit 1
+		;;
+	package)
+		prep || exit 1
+		configure || exit 1
+		build || exit 1
+		install || exit 1
+		package || exit 1
+		;;
+	clean)
+		clean || exit 1
+		;;
+	*)
+		print_usage
+		exit 1
+		;;
+	esac
+}
+
+function process_command_single ()
+{
+	case $ABUILD_PKG_COMMAND in
+	prep)
+		prep || exit 1
+		;;
+	configure)
+		configure || exit 1
+		;;
+	build)
+		build || exit 1
+		;;
+	install)
+		install || exit 1
+		;;
+	package)
+		package || exit 1
+		;;
+	clean)
+		clean || exit 1
+		;;
+	*)
+		print_usage
+		exit 1
+		;;
+	esac
+}
+
+function process_command ()
+{
+	if [ -n "$ABUILD_SINGLE_COMMAND" ]; then
+		process_command_single
+	else
+		process_command_sequence
+	fi
+}

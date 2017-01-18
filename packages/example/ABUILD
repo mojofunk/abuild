@@ -1,0 +1,7 @@
+#!/bin/bash
+
+function set_pkg_env
+{
+	PKG_NAME='example'
+	PKG_VERSION='0.1.0'
+}
