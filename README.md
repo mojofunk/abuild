@@ -1,6 +1,6 @@
-# a-build
+# abuild
 
-The purpose of a-build is to to a single set of build scripts to enable
+The purpose of abuild is to to a single set of build scripts to enable
 building applications and libraries on linux and windows(and hopefully OS X at
 some point) using gcc and clang on linux and gcc/mingw and msvc on windows.
 
@@ -15,7 +15,7 @@ some point) using gcc and clang on linux and gcc/mingw and msvc on windows.
 
 # Design
 
-The dependency building part of a-build is not specific to Ardour. It will be
+The dependency building part of abuild is not specific to Ardour. It will be
 similar to mingw-pkg.
 
 Each package will have a single common script for building all packages
