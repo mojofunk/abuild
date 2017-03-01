@@ -22,6 +22,7 @@ function set_toolset_env ()
 		if [ "$TOOLSET" == 'mingw' ]; then
 			# TODO setup mingw build env
 			. ./src/mingw_env.sh
+			set_mingw_default_host_env
 			set_mingw_default_toolset_env
 			set_msys2_mingw_env
 		elif [ "$TOOLSET" == 'msvc' ]; then
