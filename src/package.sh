@@ -22,29 +22,25 @@ function check_pkg_file ()
 	fi
 }
 
-function set_pkg_dir_env ()
+function set_pkg_build_dir_env ()
 {
 	# TODO add compiler to dir name
-
-	ABUILD_PKG_BUILD_DIR="$ABUILD_PKG_SCRIPT_PATH/BUILD"
-	mkdir -p $ABUILD_PKG_BUILD_DIR
-
-	# install directly into ABUILD_PKG_INSTALL_DIR dir if defined
-	if [ -z $ABUILD_PKG_INSTALL_DIR ]; then
-		ABUILD_PKG_INSTALL_DIR="$ABUILD_PKG_SCRIPT_PATH/INSTALL"
-		echo "Installing packages to $ABUILD_PKG_INSTALL_DIR as ABUILD_PKG_INSTALL_DIR is not defined"
-	fi
-
-	# Figure out the Build Type
 	if [ -n "$ABUILD_PKG_ENABLE_DEBUG" ]; then
-		PKG_INSTALL_DIR_NAME="${PKG_NAME}-${PKG_VERSION}-${ARCH}-dbg"
+		PKG_DIR_NAME="${PKG_NAME}-${PKG_VERSION}-${TOOLSET}-${HOST_ARCH}-dbg"
 	else
-		PKG_INSTALL_DIR_NAME="${PKG_NAME}-${PKG_VERSION}-${ARCH}"
+		PKG_DIR_NAME="${PKG_NAME}-${PKG_VERSION}-${TOOLSET}-${HOST_ARCH}"
 	fi
-	PKG_INSTALL_DIR="$ABUILD_PKG_INSTALL_DIR/$PKG_INSTALL_DIR_NAME"
 
-	if [ -n "${ABUILD_PKG_OVERRIDE_INSTALL_DIR}" ]; then
-		PKG_INSTALL_DIR="$ABUILD_PKG_OVERRIDE_INSTALL_DIR"
+	PKG_BUILD_DIR="$ABUILD_PKG_SCRIPT_PATH/BUILD/$PKG_DIR_NAME"
+}
+
+function set_pkg_install_dir_env ()
+{
+	# install directly into PKG_INSTALL_DIR dir if defined
+	if [ -z $PKG_INSTALL_DIR ]; then
+		PKG_INSTALL_DIR="$ABUILD_SCRIPT_PATH/INSTALL/$PKG_DIR_NAME"
+		echo "Installing packages to $PKG_INSTALL_DIR as PKG_INSTALL_DIR is not defined"
+	else
 		echo "Using install dir $PKG_INSTALL_DIR"
 	fi
 

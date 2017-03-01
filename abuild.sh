@@ -31,7 +31,8 @@ set_pkg_env
 check_pkg_env
 
 # Set the directories used by the package for build/installation
-set_pkg_dir_env
+set_pkg_build_dir_env
+set_pkg_install_dir_env
 
 process_pkg_deps
 

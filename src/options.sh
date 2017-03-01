@@ -31,8 +31,7 @@ function parse_options ()
 			ABUILD_ENABLE_DEBUG=1
 			;;
 		i)
-			# can this just be ABUILD_INSTALL_DIR??
-			ABUILD_OVERRIDE_INSTALL_DIR=$OPTARG
+			PKG_INSTALL_DIR=$OPTARG
 			;;
 		s)
 			# can this just be ABUILD_INSTALL_DIR??
