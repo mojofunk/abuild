@@ -31,7 +31,9 @@ function set_pkg_build_dir_env ()
 		PKG_DIR_NAME="${PKG_NAME}-${PKG_VERSION}-${TOOLSET}-${HOST_ARCH}"
 	fi
 
-	PKG_BUILD_DIR="$ABUILD_PKG_SCRIPT_PATH/BUILD/$PKG_DIR_NAME"
+	PKG_BUILD_DIR="$ABUILD_SCRIPT_PATH/BUILD/$PKG_DIR_NAME"
+
+	echo "Using package build direcory $PKG_BUILD_DIR"
 }
 
 function set_pkg_install_dir_env ()
@@ -39,9 +41,9 @@ function set_pkg_install_dir_env ()
 	# install directly into PKG_INSTALL_DIR dir if defined
 	if [ -z $PKG_INSTALL_DIR ]; then
 		PKG_INSTALL_DIR="$ABUILD_SCRIPT_PATH/INSTALL/$PKG_DIR_NAME"
-		echo "Installing packages to $PKG_INSTALL_DIR as PKG_INSTALL_DIR is not defined"
+		echo "Using package install directory $PKG_INSTALL_DIR as PKG_INSTALL_DIR is not defined"
 	else
-		echo "Using install dir $PKG_INSTALL_DIR"
+		echo "Using package install directory $PKG_INSTALL_DIR"
 	fi
 
 	PKG_BIN_DIR=$PKG_INSTALL_DIR/bin
@@ -68,10 +70,7 @@ function process_pkg_deps ()
 		if [ ! -e "$ABUILD_PKG_CACHE_DIR/$pkg" ]; then
 			echo "Building package dependency $pkg"
 
-			# TODO call the same script/executable if separate scripts for
-			# each build type are used.
-
-			$ABUILD_PKG_SCRIPT_PATH/abuild.sh $VERBOSE_FLAGS $DEBUG_FLAGS \
+			$ABUILD_SCRIPT_PATH/abuild.sh -t $TOOLSET $VERBOSE_FLAGS $DEBUG_FLAGS \
 					-i $PKG_INSTALL_DIR $ABUILD_PKG_COMMAND $pkg || exit 1
 
 			if [ $ABUILD_PKG_COMMAND == 'install' ]; then

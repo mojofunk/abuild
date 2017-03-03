@@ -36,6 +36,11 @@ function clean ()
 {
 	echo "Package $ABUILD_PKG_NAME using default clean"
 
+	if [ -d "$PKG_BUILD_DIR" ]; then
+		echo "Removing $PKG_BUILD_DIR"
+		rm -rf "$PKG_BUILD_DIR" || exit 1
+	fi
+
 	if [ -d "$PKG_INSTALL_DIR" ]; then
 		echo "Removing $PKG_INSTALL_DIR"
 		rm -rf "$PKG_INSTALL_DIR" || exit 1
@@ -110,6 +115,9 @@ function process_command_single ()
 
 function process_command ()
 {
+	mkdir -p $PKG_BUILD_DIR || exit 1
+	mkdir -p $PKG_INSTALL_DIR || exit 1
+
 	if [ -n "$ABUILD_SINGLE_COMMAND" ]; then
 		process_command_single
 	else

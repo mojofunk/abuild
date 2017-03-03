@@ -2,7 +2,13 @@
 
 function print_usage ()
 {
-	echo "usage: mingw-pkg [-d] [-h] <command> <package>"
+	echo "usage: mingw-pkg [-t] <toolset> [-d] [-h] <command> <package>"
+	echo " "
+	echo "The toolsets are:"
+	echo "    gcc"
+	echo "    mingw"
+	echo "    msvc"
+	echo "    clang"
 	echo " "
 	echo "The commands are:"
 	echo "    prep"
@@ -16,7 +22,7 @@ function print_usage ()
 function parse_options ()
 {
 	OPTIND=1
-	while getopts "h?dvsi:" opt; do
+	while getopts "h?t:dvsi:" opt; do
 		case "$opt" in
 		h)
 			print_usage
@@ -24,8 +30,12 @@ function parse_options ()
 			;;
 		v)
 			ABUILD_VERBOSE=1
-			echo "enabling verbose output"
+			echo "Enabling verbose output"
 			set -x
+			;;
+		t)
+			TOOLSET=$OPTARG
+			echo "Enabling toolset $TOOLSET"
 			;;
 		d)
 			ABUILD_ENABLE_DEBUG=1
@@ -36,7 +46,7 @@ function parse_options ()
 		s)
 			# can this just be ABUILD_INSTALL_DIR??
 			ABUILD_SINGLE_COMMAND=1
-			echo "executing single command"
+			echo "Executing single command"
 			;;
 		esac
 	done
