@@ -30,12 +30,10 @@ function parse_options ()
 			;;
 		v)
 			ABUILD_VERBOSE=1
-			echo "Enabling verbose output"
 			set -x
 			;;
 		t)
 			TOOLSET=$OPTARG
-			echo "Enabling toolset $TOOLSET"
 			;;
 		d)
 			ABUILD_ENABLE_DEBUG=1
@@ -44,9 +42,7 @@ function parse_options ()
 			PKG_INSTALL_DIR=$OPTARG
 			;;
 		s)
-			# can this just be ABUILD_INSTALL_DIR??
 			ABUILD_SINGLE_COMMAND=1
-			echo "Executing single command"
 			;;
 		esac
 	done

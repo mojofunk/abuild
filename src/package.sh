@@ -10,12 +10,21 @@ function check_pkg_env ()
 		echo "Package $ABUILD_PKG_NAME needs to set PKG_VERSION"
 		exit 1
 	fi
+	if [ -z "${HOST_ARCH+x}" ]; then
+		echo "Required variable HOST_ARCH not set....exiting"
+		exit 1
+	fi
+}
+
+function print_pkg_env ()
+{
+	echo "PKG_NAME : $PKG_NAME"
+	echo "PKG_VERSION : $PKG_VERSION"
+	echo "HOST_ARCH : $HOST_ARCH"
 }
 
 function check_pkg_file ()
 {
-	#echo "Checking Package $2"
-
 	if [ ! -d $ABUILD_PKG_DIRECTORY ] && [ ! -f $ABUILD_PKG_FILE ]; then
 		echo "No ABUILDPKG file exists at $ABUILD_PKG_FILE"
 		exit 1
