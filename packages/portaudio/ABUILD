@@ -1,0 +1,36 @@
+#!/bin/bash
+
+function set_pkg_env
+{
+	PKG_NAME='portaudio'
+	PKG_VERSION='0.1.13'
+
+	PORTAUDIO_REPO="https://github.com/mojofunk/portaudio.git"
+	PORTAUDIO_BRANCH='waf'
+}
+
+function prep ()
+{
+	cd $PKG_BUILD_DIR || exit 1
+
+	if [ ! -d $PKG_NAME ]; then
+		git clone $PORTAUDIO_REPO || exit 1
+	fi
+	cd $PKG_NAME
+	git checkout $PORTAUDIO_BRANCH || exit 1
+}
+
+function configure ()
+{
+	./waf configure --prefix='C:/' --toolset $TOOLSET --enable-static || exit 1
+}
+
+function build ()
+{
+	./waf build -j1
+}
+
+function install ()
+{
+	./waf install --destdir="$PKG_INSTALL_DIR"
+}
