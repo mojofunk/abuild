@@ -1,10 +1,8 @@
 #!/bin/bash
 
-SCRIPT_NAME=`basename $0`
-
 function print_usage ()
 {
-	echo "usage: $SCRIPT_NAME [-t] <toolset> [-d] [-h] <command> <package>"
+	echo "usage: $ABUILD_SCRIPT_NAME [-t] <toolset> [-d] [-h] [-v] [-s] <command> <package>"
 	echo " "
 	echo "The toolsets are:"
 	echo "    gcc"
