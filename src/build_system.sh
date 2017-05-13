@@ -13,6 +13,9 @@ function set_build_system_env ()
 			BUILD_SYSTEM='Fedora-24'
 		fi
 			BUILD_SYSTEM_FEDORA=1
+	elif [ -f /etc/debian_version ]; then
+		BUILD_SYSTEM='debian'
+		BUILD_SYSTEM_DEBIAN=1
 	elif [ -n "${MSYSTEM}" ]; then
 		BUILD_SYSTEM='MSYS2'
 		# TODO this should go somewhere else, this is host env
