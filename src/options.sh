@@ -1,8 +1,10 @@
 #!/bin/bash
 
+SCRIPT_NAME=`basename $0`
+
 function print_usage ()
 {
-	echo "usage: mingw-pkg [-t] <toolset> [-d] [-h] <command> <package>"
+	echo "usage: $SCRIPT_NAME [-t] <toolset> [-d] [-h] <command> <package>"
 	echo " "
 	echo "The toolsets are:"
 	echo "    gcc"
