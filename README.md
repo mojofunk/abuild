@@ -12,6 +12,8 @@ some point) using gcc and clang on linux and gcc/mingw and msvc on windows.
 - Modify compiler/link flags for all builds
 - Build from git repository, source tarball, or use existing system binaries.
 - Use bash shell script and python(No powershell)
+- Override Build directory with an environment avariable to be able to
+  use local checkout/extracted tarball/etc for development
 
 # Design
 
