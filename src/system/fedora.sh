@@ -33,7 +33,8 @@ function system_toolset_supported ()
 
 function system_set_default_host_arch ()
 {
-	${HOST_ARCH:=`uname -i`}
+	UNAME_ARCH=`uname -i`
+	: ${HOST_ARCH:="$UNAME_ARCH"}
 }
 
 function system_set_default_toolset ()
