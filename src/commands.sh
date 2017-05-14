@@ -2,7 +2,7 @@
 
 function default_prep ()
 {
-	cd $PKG_BUILD_DIR || exit 1
+	cd $PKG_BUILD_ROOT_DIR || exit 1
 
 	if [ ! -d $PKG_NAME ]; then
 
@@ -56,9 +56,9 @@ function clean ()
 {
 	echo "Package $ABUILD_PKG_NAME using default clean"
 
-	if [ -d "$PKG_BUILD_DIR" ]; then
-		echo "Removing $PKG_BUILD_DIR"
-		rm -rf "$PKG_BUILD_DIR" || exit 1
+	if [ -d "$PKG_BUILD_ROOT_DIR" ]; then
+		echo "Removing $PKG_BUILD_ROOT_DIR"
+		rm -rf "$PKG_BUILD_ROOT_DIR" || exit 1
 	fi
 
 	if [ -d "$PKG_INSTALL_DIR" ]; then
@@ -135,7 +135,7 @@ function process_command_single ()
 
 function process_command ()
 {
-	mkdir -p $PKG_BUILD_DIR || exit 1
+	mkdir -p $PKG_BUILD_ROOT_DIR || exit 1
 	mkdir -p $PKG_INSTALL_DIR || exit 1
 
 	if [ -n "$ABUILD_SINGLE_COMMAND" ]; then

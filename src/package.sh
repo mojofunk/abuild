@@ -33,29 +33,32 @@ function check_pkg_file ()
 
 function set_pkg_build_dir_env ()
 {
-	# TODO add compiler to dir name
 	if [ -n "$ABUILD_PKG_ENABLE_DEBUG" ]; then
-		PKG_DIR_NAME="${PKG_NAME}-${PKG_VERSION}-${TOOLSET}-${HOST_ARCH}-dbg"
+		PKG_DEFAULT_BUILD_ROOT_DIR_NAME="${TOOLSET}-${HOST_ARCH}-dbg"
 	else
-		PKG_DIR_NAME="${PKG_NAME}-${PKG_VERSION}-${TOOLSET}-${HOST_ARCH}"
+		PKG_DEFAULT_BUILD_ROOT_DIR_NAME="${TOOLSET}-${HOST_ARCH}"
 	fi
 
-	PKG_DEFAULT_BUILD_DIR="$ABUILD_ROOT_PATH/BUILD/$PKG_DIR_NAME"
+	PKG_DEFAULT_BUILD_ROOT_DIR="$ABUILD_ROOT_PATH/BUILD/$PKG_DEFAULT_BUILD_ROOT_DIR_NAME"
 
-	: ${PKG_BUILD_DIR:="$PKG_DEFAULT_BUILD_DIR"}
+	: ${PKG_BUILD_ROOT_DIR:="$PKG_DEFAULT_BUILD_ROOT_DIR"}
 
-	echo "Using package build direcory $PKG_BUILD_DIR"
+	echo "Using package build root directory $PKG_BUILD_ROOT_DIR"
 }
 
 function set_pkg_install_dir_env ()
 {
-	# install directly into PKG_INSTALL_DIR dir if defined
-	if [ -z $PKG_INSTALL_DIR ]; then
-		PKG_INSTALL_DIR="$ABUILD_ROOT_PATH/INSTALL/$PKG_DIR_NAME"
-		echo "Using package install directory $PKG_INSTALL_DIR as PKG_INSTALL_DIR is not defined"
+	if [ -n "$ABUILD_PKG_ENABLE_DEBUG" ]; then
+		PKG_INSTALL_DIR_NAME="${PKG_NAME}-${PKG_VERSION}-${TOOLSET}-${HOST_ARCH}-dbg"
 	else
-		echo "Using package install directory $PKG_INSTALL_DIR"
+		PKG_INSTALL_DIR_NAME="${PKG_NAME}-${PKG_VERSION}-${TOOLSET}-${HOST_ARCH}"
 	fi
+
+	PKG_DEFAULT_INSTALL_DIR="$ABUILD_ROOT_PATH/INSTALL/$PKG_INSTALL_DIR_NAME"
+
+	: ${PKG_INSTALL_DIR:="$PKG_DEFAULT_INSTALL_DIR"}
+
+	echo "Using package install directory $PKG_INSTALL_DIR"
 
 	PKG_BIN_DIR=$PKG_INSTALL_DIR/bin
 	PKG_LIB_DIR=$PKG_INSTALL_DIR/lib
