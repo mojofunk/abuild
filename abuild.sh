@@ -16,6 +16,8 @@ check_pkg_file
 
 set_system
 
+system_set_default_host_arch
+
 check_system_env
 
 print_system_env

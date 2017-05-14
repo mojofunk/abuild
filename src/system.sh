@@ -12,7 +12,6 @@ function set_system ()
 			fi
 		fi
 	done
-
 }
 
 function check_system_env ()
@@ -41,6 +40,12 @@ function system_set_env ()
 function system_set_build_env ()
 {
 	echo "Using default system build environment"
+}
+
+function system_set_default_host_arch ()
+{
+	echo "Setting a default HOST_ARCH is required"
+	exit 1
 }
 
 function system_set_default_toolset ()

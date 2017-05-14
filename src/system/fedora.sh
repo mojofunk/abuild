@@ -33,7 +33,6 @@ function system_toolset_supported ()
 
 function system_set_default_host_arch ()
 {
-	TOOLSET='gcc'
 	${HOST_ARCH:=`uname -i`}
 }
 
