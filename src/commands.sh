@@ -1,8 +1,28 @@
 #!/bin/bash
 
+function default_prep ()
+{
+	cd $PKG_BUILD_DIR || exit 1
+
+	if [ ! -d $PKG_NAME ]; then
+
+		# If PKG_REPO defined checkout repository
+		if [ -n ${PKG_REPO} ]; then
+			git clone $PKG_REPO || exit 1
+		fi
+		cd $PKG_NAME
+		if [ -n ${PKG_BRANCH} ]; then
+			git checkout $PKG_BRANCH || exit 1
+		fi
+	else
+		cd $PKG_NAME
+	fi
+}
+
 function prep ()
 {
 	echo "Package $ABUILD_PKG_NAME using default prep"
+	default_prep
 }
 
 function configure ()
