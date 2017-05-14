@@ -17,6 +17,8 @@ function prep ()
 		git clone $PORTAUDIO_REPO || exit 1
 		cd $PKG_NAME
 		git checkout $PORTAUDIO_BRANCH || exit 1
+	else
+		cd $PKG_NAME
 	fi
 }
 
