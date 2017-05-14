@@ -26,7 +26,7 @@ function print_pkg_env ()
 function check_pkg_file ()
 {
 	if [ ! -d $ABUILD_PKG_DIRECTORY ] && [ ! -f $ABUILD_PKG_FILE ]; then
-		echo "No ABUILDPKG file exists at $ABUILD_PKG_FILE"
+		echo "No ABUILD file exists at $ABUILD_PKG_FILE"
 		exit 1
 	fi
 }
@@ -40,7 +40,9 @@ function set_pkg_build_dir_env ()
 		PKG_DIR_NAME="${PKG_NAME}-${PKG_VERSION}-${TOOLSET}-${HOST_ARCH}"
 	fi
 
-	PKG_BUILD_DIR="$ABUILD_ROOT_PATH/BUILD/$PKG_DIR_NAME"
+	PKG_DEFAULT_BUILD_DIR="$ABUILD_ROOT_PATH/BUILD/$PKG_DIR_NAME"
+
+	: ${PKG_BUILD_DIR:="$PKG_DEFAULT_BUILD_DIR"}
 
 	echo "Using package build direcory $PKG_BUILD_DIR"
 }
