@@ -10,7 +10,6 @@ function _set_msys2_mingw_env ()
 	export PKG_CONFIG_LIBDIR=$MINGW_ROOT/lib/pkgconfig
 	export PKGCONFIG=/usr/bin/pkg-config
 	export WINRC=windres
-	export AR=$HOST_SYSTEM-gcc-ar
 }
 
 function system_is_detected ()

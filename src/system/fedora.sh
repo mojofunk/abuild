@@ -1,5 +1,19 @@
 #!/bin/bash
 
+function _set_fedora_mingw_env ()
+{
+	export AR=${AR:=$HOST_SYSTEM-ar}
+	export RANLIB=${RANLIB:=$HOST_SYSTEM-ranlib}
+	export CC=${CC:=$HOST_SYSTEM-gcc}
+	export CPP=${CPP:=$HOST_SYSTEM-g++}
+	export CXX=${CXX:=$HOST_SYSTEM-g++}
+	export AS=${AS:=$HOST_SYSTEM-as}
+	export LINK_CC=${LINK_CC:=$HOST_SYSTEM-gcc}
+	export LINK_CXX=${LINK_CXX:=$HOST_SYSTEM-g++}
+	export WINRC=${WINRC:=$HOST_SYSTEM-windres}
+	export STRIP=${STRIP:=$HOST_SYSTEM-strip}
+}
+
 function system_is_detected ()
 {
 	if [ -f /etc/system-release ]; then
@@ -40,6 +54,13 @@ function system_set_default_host_arch ()
 function system_set_default_toolset ()
 {
 	TOOLSET='gcc'
+}
+
+function system_set_build_env ()
+{
+	if [ "$TOOLSET" == 'mingw' ]; then
+		_set_fedora_mingw_env
+	fi
 }
 
 # TODO setup_build_system ()
