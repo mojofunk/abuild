@@ -66,6 +66,10 @@ function set_pkg_install_dir_env ()
 	PKG_LIB_DIR=$PKG_INSTALL_DIR/lib
 	PKG_ETC_DIR=$PKG_INSTALL_DIR/etc
 	PKG_SHARE_DIR=$PKG_INSTALL_DIR/share
+
+	# not sure if this is the best place for this but it can only be set
+	# after the install path has been determined
+	export PKG_CONFIG_PATH=${PKG_INSTALL_DIR}/lib/pkgconfig
 }
 
 function process_pkg_deps ()
