@@ -9,16 +9,18 @@ function set_pkg_env
 
 function configure ()
 {
-	./wafer configure --prefix=${PREFIX} --toolset=${TOOLSET} --enable-static --enable-shared \
-	                --with-directx --with-wdmks --with-wasapi --with-tests --with-examples
+	./wafer ${PKG_VERBOSE_OPTION} configure --prefix=${PREFIX} --toolset=${TOOLSET} \
+	                                        --enable-static --enable-shared \
+	                                        --with-directx --with-wdmks --with-wasapi \
+	                                        --with-tests --with-examples
 }
 
 function build ()
 {
-	./wafer build $SMP_MAKEFLAGS
+	./wafer ${PKG_VERBOSE_OPTION} build $SMP_MAKEFLAGS
 }
 
 function install ()
 {
-	./wafer install --destdir="$PKG_INSTALL_DIR"
+	./wafer ${PKG_VERBOSE_OPTION} install --destdir="$PKG_INSTALL_DIR"
 }
