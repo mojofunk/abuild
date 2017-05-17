@@ -22,21 +22,26 @@ function print_usage ()
 function parse_options ()
 {
 	OPTIND=1
-	while getopts "h?t:dvsi:" opt; do
+	while getopts "h?t:dvVsi:" opt; do
 		case "$opt" in
 		h)
 			print_usage
 			exit 0
 			;;
-		v)
-			ABUILD_VERBOSE=1
+		V)
+			ABUILD_VERBOSE_OPTION=-V
 			set -x
+			;;
+		v)
+			PKG_VERBOSE_ENABLE=true
+			PKG_VERBOSE_OPTION=-v
 			;;
 		t)
 			TOOLSET=$OPTARG
 			;;
 		d)
-			ABUILD_ENABLE_DEBUG=1
+			PKG_DEBUG_ENABLE=true
+			PKG_DEBUG_OPTION=-d
 			;;
 		i)
 			PKG_INSTALL_DIR=$OPTARG

@@ -74,14 +74,6 @@ function set_pkg_install_dir_env ()
 
 function process_pkg_deps ()
 {
-	if [ -n "${ABUILD_PKG_VERBOSE}" ]; then
-		VERBOSE_FLAGS=-v
-	fi
-
-	if [ -n "${ABUILD_PKG_ENABLE_DEBUG}" ]; then
-		DEBUG_FLAGS=-d
-	fi
-
 	# TODO put in toplevel? or in /share
 	ABUILD_PKG_CACHE_DIR="$PKG_INSTALL_DIR/abuild"
 
@@ -90,8 +82,10 @@ function process_pkg_deps ()
 		if [ ! -e "$ABUILD_PKG_CACHE_DIR/$pkg" ]; then
 			echo "Building package dependency $pkg"
 
-			$ABUILD_SCRIPT_PATH -t $TOOLSET $VERBOSE_FLAGS $DEBUG_FLAGS \
-					-i $PKG_INSTALL_DIR $ABUILD_PKG_COMMAND $pkg || exit 1
+			$ABUILD_SCRIPT_PATH -t $TOOLSET $ABUILD_VERBOSE_OPTION \
+			                    $PKG_VERBOSE_OPTION $PKG_DEBUG_OPTION \
+			                    -i $PKG_INSTALL_DIR $ABUILD_PKG_COMMAND \
+			                    $pkg || exit 1
 
 			if [ $ABUILD_PKG_COMMAND == 'install' ]; then
 				mkdir -p "$ABUILD_PKG_CACHE_DIR"
