@@ -18,6 +18,8 @@ on windows.
 - Use bash shell script and python(No powershell)
 - Override Build directory with an environment avariable to be able to
   use local checkout/extracted tarball/etc for development
+- Easily install into system locations, default install directory or
+  specified path.
 
 # Design
 
