@@ -9,7 +9,7 @@ function set_pkg_env
 
 function configure ()
 {
-	./wafer configure --toolset=${TOOLSET} --enable-static --enable-shared \
+	./wafer configure --prefix=${PREFIX} --toolset=${TOOLSET} --enable-static --enable-shared \
 	                --with-directx --with-wdmks --with-wasapi --with-tests --with-examples
 }
 
