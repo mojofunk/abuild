@@ -5,20 +5,20 @@ function set_pkg_env
 	PKG_NAME='portaudio'
 	PKG_VERSION='2.0'
 	PKG_REPO="https://github.com/mojofunk/portaudio.git"
-	PKG_BRANCH='waf'
 }
 
 function configure ()
 {
-	./waf configure --platform=win32 --with-directx --with-wdmks --with-wasapi --with-tests --with-examples
+	./wafer configure --toolset=${TOOLSET} --enable-static --enable-shared \
+	                --with-directx --with-wdmks --with-wasapi --with-tests --with-examples
 }
 
 function build ()
 {
-	./waf build $SMP_MAKEFLAGS
+	./wafer build $SMP_MAKEFLAGS
 }
 
 function install ()
 {
-	./waf install --destdir="$PKG_INSTALL_DIR"
+	./wafer install --destdir="$PKG_INSTALL_DIR"
 }
