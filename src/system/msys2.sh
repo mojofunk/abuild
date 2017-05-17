@@ -1,14 +1,20 @@
 #!/bin/bash
 
-function _set_msys2_mingw_env ()
+function _set_msys2_common_env ()
 {
 	export PYTHON=/usr/bin/python3
+	export PREFIX=${PREFIX:='C:/'}
+}
+
+function _set_msys2_mingw_env ()
+{
+	_set_msys2_common_env
 
 	# TODO /mingw64
-	export MINGW_ROOT=/mingw32
+	#export MINGW_ROOT=/mingw32
 
-	export PKG_CONFIG_LIBDIR=$MINGW_ROOT/lib/pkgconfig
-	export PKGCONFIG=/usr/bin/pkg-config
+	#export PKG_CONFIG_LIBDIR=$MINGW_ROOT/lib/pkgconfig
+	#export PKGCONFIG=/usr/bin/pkg-config
 	export WINRC=windres
 }
 
@@ -45,6 +51,8 @@ function system_set_build_env ()
 {
 	if [ "$TOOLSET" == 'mingw' ]; then
 		_set_msys2_mingw_env
+	elif [ "$TOOLSET" == 'msvc' ]; then
+		_set_msys2_common_env
 	fi
 }
 

@@ -9,9 +9,9 @@ function set_mingw_default_build_env ()
 
 function set_mingw_default_toolset_env ()
 {
-	export PKG_CONFIG_PREFIX=${PKG_CONFIG_PREFIX:=$MINGW_ROOT}
-	export PKG_CONFIG_LIBDIR=${PKG_CONFIG_LIBDIR:=$MINGW_ROOT/lib/pkgconfig}
-	export PKGCONFIG=${PKGCONFIG:=pkg-config}
+	#export PKG_CONFIG_PREFIX=${PKG_CONFIG_PREFIX:=$MINGW_ROOT}
+	#export PKG_CONFIG_LIBDIR=${PKG_CONFIG_LIBDIR:=$MINGW_ROOT/lib/pkgconfig}
+	#export PKGCONFIG=${PKGCONFIG:=pkg-config}
 	export PYTHON=${PYTHON:=python}
 }
 

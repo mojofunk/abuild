@@ -12,6 +12,8 @@ function _set_fedora_mingw_env ()
 	export LINK_CXX=${LINK_CXX:=$HOST_SYSTEM-g++}
 	export WINRC=${WINRC:=$HOST_SYSTEM-windres}
 	export STRIP=${STRIP:=$HOST_SYSTEM-strip}
+
+	export PREFIX=${PREFIX:='/'}
 }
 
 function system_is_detected ()
