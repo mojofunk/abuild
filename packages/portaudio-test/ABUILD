@@ -1,0 +1,25 @@
+#!/bin/bash
+
+function set_pkg_env
+{
+	PKG_NAME='portaudio-test'
+	PKG_VERSION='1.0'
+	PKG_REPO="https://github.com/mojofunk/portaudio-test.git"
+
+	PKG_DEPS='portaudio'
+}
+
+function configure ()
+{
+	./wafer configure --prefix=$PREFIX --toolset=${TOOLSET}
+}
+
+function build ()
+{
+	./wafer build $SMP_MAKEFLAGS
+}
+
+function install ()
+{
+	./wafer install --destdir="$PKG_INSTALL_DIR"
+}
