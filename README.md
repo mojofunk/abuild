@@ -68,27 +68,28 @@ respect CFLAGS, CXXFLAGS and LINKFLAGS
 
 # Configuration
 
-The build and install directories will be determined by
-$HOST_SYSTEM-$COMPILER-$HOST_ARCH 
+The default build root directory name is determined by
+$PLATFORM-$TOOLSET-$HOST_ARCH in order to have separate builds and speed
+up compilation (useful for platforms without a compiler cache).
+
+The build directory can be overridden by the PKG_BUILD_ROOT_DIR
+environment variable in order to allow development in a separate
+directory (with read-write repositories for instance). The package
+directory within the PKG_BUILD_ROOT_DIR must match the name of the
+package.
+
+The default install directories will be determined by
+$PKG_NAME-$PKG_VERSION-$PKG_RELEASE-$PLATFORM-$TOOLSET-$HOST_ARCH
 
 e.g
 
-install/windows-msvc-x86/bin
-install/windows-msvc-x86/lib
-install/windows-msvc-x86/include
-install/windows-msvc-x86/share
+install/awesome-app-1.0-1-windows-msvc-i686
+install/awesome-app-1.0-1-windows-mingw-x86_64
 
-install/windows-msvc-x86_64/bin
+install/awesome-app-1.0-1-linux-gcc-x86_64
 
-install/windows-mingw-x86/bin
-install/windows-mingw-x86/lib
+install/awesome-app-1.0-2-linux-clang-x86_64
 
-install/windows-mingw-x86_64/lib
-
-install/linux-gcc-x86/bin
-
-install/linux-clang-x86_64/bin
-
-install/osx-clang-x86_64/bin
+install/awesome-app-1.0-3-macos-clang-x86_64
 
 # Installer
