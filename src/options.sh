@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function print_usage ()
+function print_usage
 {
 	echo "usage: $ABUILD_SCRIPT_NAME [-t] <toolset> [-d] [-h] [-v] [-s] <command> <package>"
 	echo " "
@@ -19,7 +19,7 @@ function print_usage ()
 	echo "    clean"
 }
 
-function parse_options ()
+function parse_options
 {
 	OPTIND=1
 	while getopts "h?t:dvVsi:" opt; do

@@ -6,7 +6,7 @@
 . ./src/options.sh
 . ./src/package.sh
 . ./src/common_env.sh
-#. ./src/tools.sh
+. ./src/tools.sh
 
 parse_options $@
 
@@ -25,7 +25,7 @@ print_system_env
 # export environment based on build system and host/compiler
 set_toolset
 
-system_set_build_env
+system_set_toolset_env
 
 # source the package file to get variables and functions
 . $ABUILD_PKG_FILE
@@ -39,8 +39,11 @@ check_pkg_env
 print_pkg_env
 
 # Set the directories used by the package for build/installation
+set_pkg_source_dir_env
 set_pkg_build_dir_env
 set_pkg_install_dir_env
+
+system_set_path_env
 
 process_pkg_deps
 

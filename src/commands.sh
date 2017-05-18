@@ -1,7 +1,9 @@
 #!/bin/bash
 
-function default_prep ()
+function default_prep
 {
+	echo "Package $ABUILD_PKG_NAME using default prep"
+
 	cd $PKG_BUILD_ROOT_DIR || exit 1
 
 	if [ ! -d $PKG_NAME ]; then
@@ -16,33 +18,49 @@ function default_prep ()
 		fi
 	else
 		cd $PKG_NAME
+		return
 	fi
 }
 
-function prep ()
+function prep
 {
-	echo "Package $ABUILD_PKG_NAME using default prep"
 	default_prep
 }
 
-function configure ()
+function _default_configure
 {
-	echo "Package $ABUILD_PKG_NAME using default configure"
+	echo "Package $ABUILD_PKG_NAME using default prep"
 }
 
-function build ()
+function configure
+{
+	_default_configure
+}
+
+function _default_build
 {
 	echo "Package $ABUILD_PKG_NAME using default build"
 }
 
-function install ()
+function build
+{
+	_default_build
+}
+
+function _default_install
 {
 	echo "Package $ABUILD_PKG_NAME using default install"
 }
 
-function package ()
+function install
+{
+	_default_install
+}
+
+function _default_package
 {
 	echo "Package $ABUILD_PKG_NAME using default package"
+
 	echo "Creating tarball from $PKG_INSTALL_DIR ..."
 	cd $PKG_INSTALL_DIR
 	echo "pwd: "
@@ -52,7 +70,12 @@ function package ()
 	cd -
 }
 
-function clean ()
+function package
+{
+	_default_package
+}
+
+function _default_clean
 {
 	echo "Package $ABUILD_PKG_NAME using default clean"
 
@@ -67,7 +90,12 @@ function clean ()
 	fi
 }
 
-function process_command_sequence ()
+function clean
+{
+	_default_clean
+}
+
+function process_command_sequence
 {
 	case $ABUILD_PKG_COMMAND in
 	prep)
@@ -105,7 +133,7 @@ function process_command_sequence ()
 	esac
 }
 
-function process_command_single ()
+function process_command_single
 {
 	case $ABUILD_PKG_COMMAND in
 	prep)
@@ -133,8 +161,9 @@ function process_command_single ()
 	esac
 }
 
-function process_command ()
+function process_command
 {
+	mkdir -p $PKG_SRC_ROOT_DIR || exit 1
 	mkdir -p $PKG_BUILD_ROOT_DIR || exit 1
 	mkdir -p $PKG_INSTALL_DIR || exit 1
 

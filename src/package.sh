@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function check_pkg_env ()
+function check_pkg_env
 {
 	if [ -z "${PKG_NAME}" ]; then
 		echo "Package $ABUILD_PKG_NAME needs to set PKG_NAME"
@@ -16,14 +16,14 @@ function check_pkg_env ()
 	fi
 }
 
-function print_pkg_env ()
+function print_pkg_env
 {
 	echo "PKG_NAME : $PKG_NAME"
 	echo "PKG_VERSION : $PKG_VERSION"
 	echo "HOST_ARCH : $HOST_ARCH"
 }
 
-function check_pkg_file ()
+function check_pkg_file
 {
 	if [ ! -d $ABUILD_PKG_DIRECTORY ] && [ ! -f $ABUILD_PKG_FILE ]; then
 		echo "No ABUILD file exists at $ABUILD_PKG_FILE"
@@ -31,7 +31,16 @@ function check_pkg_file ()
 	fi
 }
 
-function set_pkg_build_dir_env ()
+function set_pkg_source_dir_env
+{
+	PKG_DEFAULT_SRC_ROOT_DIR="$ABUILD_ROOT_PATH/SOURCE"
+
+	: ${PKG_SRC_ROOT_DIR:="$PKG_DEFAULT_SRC_ROOT_DIR"}
+
+	echo "Using package source root directory $PKG_BUILD_ROOT_DIR"
+}
+
+function set_pkg_build_dir_env
 {
 	if [ -n "$ABUILD_PKG_ENABLE_DEBUG" ]; then
 		PKG_DEFAULT_BUILD_ROOT_DIR_NAME="${TOOLSET}-${HOST_ARCH}-dbg"
@@ -46,7 +55,7 @@ function set_pkg_build_dir_env ()
 	echo "Using package build root directory $PKG_BUILD_ROOT_DIR"
 }
 
-function set_pkg_install_dir_env ()
+function set_pkg_install_dir_env
 {
 	if [ -n "$ABUILD_PKG_ENABLE_DEBUG" ]; then
 		PKG_INSTALL_DIR_NAME="${PKG_NAME}-${PKG_VERSION}-${TOOLSET}-${HOST_ARCH}-dbg"
@@ -72,7 +81,7 @@ function set_pkg_install_dir_env ()
 	export PKG_CONFIG_PATH=${PKG_INSTALL_DIR}/lib/pkgconfig
 }
 
-function process_pkg_deps ()
+function process_pkg_deps
 {
 	# TODO put in toplevel? or in /share
 	ABUILD_PKG_CACHE_DIR="$PKG_INSTALL_DIR/abuild"

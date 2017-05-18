@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function set_system ()
+function set_system
 {
 	for system_file in "$ABUILD_ROOT_PATH/src/system"/*
 	do
@@ -14,7 +14,7 @@ function set_system ()
 	done
 }
 
-function check_system_env ()
+function check_system_env
 {
 	if [ -z ${BUILD_SYSTEM+x} ]; then
 		echo "Cannot determine build system....exiting"
@@ -22,7 +22,7 @@ function check_system_env ()
 	fi
 }
 
-function print_system_env ()
+function print_system_env
 {
 	echo "BUILD_SYSTEM : ${BUILD_SYSTEM}"
 }
@@ -30,25 +30,31 @@ function print_system_env ()
 # The system API/Interface
 
 # Setup required environment variables
-function system_set_env ()
+function system_set_env
 {
 	echo "Using default system Environment"
 }
 
 # The system may need to do further setup after the toolset has been
 # set, this is the function to do it in.
-function system_set_build_env ()
+function system_set_toolset_env
 {
 	echo "Using default system build environment"
 }
 
-function system_set_default_host_arch ()
+function system_set_path_env
+{
+	echo "Using default system build environment"
+	export PREFIX=${PREFIX:=$PKG_INSTALL_DIR}
+}
+
+function system_set_default_host_arch
 {
 	echo "Setting a default HOST_ARCH is required"
 	exit 1
 }
 
-function system_set_default_toolset ()
+function system_set_default_toolset
 {
 	echo "Setting a default toolset is required"
 	exit 1
