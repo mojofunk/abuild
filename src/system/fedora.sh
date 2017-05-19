@@ -16,6 +16,9 @@ function _set_fedora_mingw_env ()
 	export PKG_CONFIG_PREFIX=${PKG_CONFIG_PREFIX:=$MINGW_ROOT}
 	export PKG_CONFIG_LIBDIR=${PKG_CONFIG_LIBDIR:=$MINGW_ROOT/lib/pkgconfig}
 	#export PKGCONFIG=${PKGCONFIG:=pkg-config}
+
+	# TODO this is only correct when using default PKG_INSTALL_DIR
+	export PREFIX=${PREFIX:='/'}
 }
 
 function system_is_detected ()

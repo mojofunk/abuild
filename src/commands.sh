@@ -5,18 +5,15 @@ function default_prep
 	cd $PKG_BUILD_ROOT_DIR || exit 1
 
 	if [ ! -d $PKG_NAME ]; then
-
-		# If PKG_REPO defined checkout repository
-		if [ -n ${PKG_REPO} ]; then
-			git clone $PKG_REPO || exit 1
+		if [ -n "$PKG_REPO" ]; then
+			git clone "$PKG_REPO" || exit 1
+			cd "$PKG_NAME"
+			if [ -n "${PKG_BRANCH}" ]; then
+				git checkout $PKG_BRANCH || exit 1
+			fi
+		elif [ -n "${PKG_SRC_URL}" ]; then
+			download_source_and_unpack
 		fi
-		cd $PKG_NAME
-		if [ -n ${PKG_BRANCH} ]; then
-			git checkout $PKG_BRANCH || exit 1
-		fi
-	else
-		cd $PKG_NAME
-		return
 	fi
 }
 

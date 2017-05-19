@@ -34,8 +34,6 @@ system_set_toolset_env
 # call function defined by package to setup environment
 set_pkg_env
 
-set_build_tool
-
 # Check that the package has set at least the required environment vars 
 check_pkg_env
 
@@ -47,6 +45,8 @@ set_pkg_build_dir_env
 set_pkg_install_dir_env
 
 system_set_path_env
+
+set_build_tool
 
 process_pkg_deps
 

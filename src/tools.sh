@@ -8,9 +8,9 @@ function download
 function download_source_and_unpack
 {
 	cd $PKG_SRC_ROOT_DIR
-	download $PKG_SRC $PKG_URL || exit 1
-	tar xf ${PKG_SRC}
-	# must not exists
+	download $PKG_SRC_FILE $PKG_SRC_URL || exit 1
+	tar xf ${PKG_SRC_FILE}
+	# must not exist
 	mv ${PKG_SRC_DIR} "$PKG_BUILD_ROOT_DIR/$PKG_NAME"
 }
 
@@ -27,6 +27,8 @@ function autotools_set_env
 	if [ -n "$PREFIX" ]; then
 		PREFIX_ARG=--prefix=${PREFIX}
 	fi
+
+	DESTDIR_ARG="DESTDIR=$PKG_INSTALL_DIR"
 }
 
 function autotools_configure
@@ -41,7 +43,7 @@ function autotools_build
 
 function autotools_install
 {
-	make install
+	make $DESTDIR_ARG install
 }
 
 function waf_set_env
@@ -69,6 +71,8 @@ function waf_set_env
 	if [ -n "$CXX_COMPILER_NAME" ]; then
 		CXX_COMPILER_ARG=--check-cxx-compiler=${CXX_COMPILER_NAME}
 	fi
+
+	DESTDIR_ARG="--destdir=$PKG_INSTALL_DIR"
 }
 
 function wafer_configure
@@ -84,5 +88,5 @@ function wafer_build
 
 function wafer_install
 {
-	./wafer ${PKG_VERBOSE_OPTION} install --destdir="$PKG_INSTALL_DIR" ${1}
+	./wafer ${PKG_VERBOSE_OPTION} install $DESTDIR_ARG ${1}
 }
