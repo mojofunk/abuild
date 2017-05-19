@@ -60,3 +60,9 @@ function system_set_default_toolset ()
 {
 	TOOLSET='mingw'
 }
+
+function system_set_toolset_env {
+	if [ "$TOOLSET" == 'mingw' ]; then
+		_set_msys2_mingw_env
+	fi
+}
