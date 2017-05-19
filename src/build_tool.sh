@@ -17,3 +17,80 @@ function set_build_tool
 
 	echo "Using build tool ${PKG_BUILD_TOOL}"
 }
+
+function autotools_set_env
+{
+	if [ -n "$HOST_SYSTEM" ]; then
+		HOST_SYSTEM_ARG=--host=${HOST_SYSTEM}
+	fi
+
+	# if BUILD_SYSTEM then BUILD_SYSTEM_ARG="--build=${BUILD_SYSTEM}"
+
+	# CFLAGS CPPFLAGS CXXFLAGS LDFLAGS ?
+
+	if [ -n "$PREFIX" ]; then
+		PREFIX_ARG=--prefix=${PREFIX}
+	fi
+
+	DESTDIR_ARG="DESTDIR=$PKG_INSTALL_DIR"
+}
+
+function autotools_configure
+{
+	./configure $PREFIX_ARG $HOST_SYSTEM_ARG ${1}
+}
+
+function autotools_build
+{
+	make $SMP_MAKEFLAGS
+}
+
+function autotools_install
+{
+	make $DESTDIR_ARG install
+}
+
+function waf_set_env
+{
+	PREFIX_ARG=--prefix=${PREFIX}
+
+	if [ ${TOOLSET} == 'mingw' ]; then
+		C_COMPILER_NAME=gcc
+		CXX_COMPILER_NAME=g++
+	elif [ ${TOOLSET} == 'clang']; then
+		C_COMPILER_NAME=clang
+		CXX_COMPILER_NAME=clang++
+	elif [ ${TOOLSET} == 'msvc']; then
+		C_COMPILER_NAME=msvc
+		CXX_COMPILER_NAME=mvsc
+	elif [ ${TOOLSET} == 'gcc']; then
+		C_COMPILER_NAME=gcc
+		CXX_COMPILER_NAME=g++
+	fi
+
+	if [ -n "$C_COMPILER_NAME" ]; then
+		C_COMPILER_ARG=--check-c-compiler=${C_COMPILER_NAME}
+	fi
+
+	if [ -n "$CXX_COMPILER_NAME" ]; then
+		CXX_COMPILER_ARG=--check-cxx-compiler=${CXX_COMPILER_NAME}
+	fi
+
+	DESTDIR_ARG="--destdir=$PKG_INSTALL_DIR"
+}
+
+function wafer_configure
+{
+	waf_set_env
+	./wafer ${PKG_VERBOSE_OPTION} configure $PREFIX_ARG $C_COMPILER_ARG $CXX_COMPILER_ARG ${1}
+}
+
+function wafer_build
+{
+	./wafer ${PKG_VERBOSE_OPTION} build $SMP_MAKEFLAGS ${1}
+}
+
+function wafer_install
+{
+	./wafer ${PKG_VERBOSE_OPTION} install $DESTDIR_ARG ${1}
+}

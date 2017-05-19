@@ -7,7 +7,7 @@
 . ./src/options.sh
 . ./src/package.sh
 . ./src/common_env.sh
-. ./src/tools.sh
+. ./src/utils.sh
 
 parse_options $@
 
