@@ -19,6 +19,7 @@ function _set_fedora_mingw_env ()
 
 	# TODO this is only correct when using default PKG_INSTALL_DIR
 	export PREFIX=${PREFIX:='/'}
+	export LIBDIR=${LIBDIR:="${PREFIX}lib"}
 }
 
 function system_is_detected ()
