@@ -76,13 +76,18 @@ function waf_set_env
 		CXX_COMPILER_ARG=--check-cxx-compiler=${CXX_COMPILER_NAME}
 	fi
 
+	if [ -n "$LIBDIR" ]; then
+		LIBDIR_ARG=--libdir=${LIBDIR}
+	fi
+
 	DESTDIR_ARG="--destdir=$PKG_INSTALL_DIR"
 }
 
 function wafer_configure
 {
 	waf_set_env
-	./wafer ${PKG_VERBOSE_OPTION} configure $PREFIX_ARG $C_COMPILER_ARG $CXX_COMPILER_ARG ${1}
+	./wafer ${PKG_VERBOSE_OPTION} configure $PREFIX_ARG $LIBDIR_ARG \
+	                                        $C_COMPILER_ARG $CXX_COMPILER_ARG ${1}
 }
 
 function wafer_build
