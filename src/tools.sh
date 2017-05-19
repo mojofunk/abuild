@@ -14,10 +14,8 @@ function download_source_and_unpack
 	mv ${PKG_SRC_DIR} "$PKG_BUILD_ROOT_DIR/$PKG_NAME"
 }
 
-function autotools_configure
+function autotools_set_env
 {
-	# if HOST_SYSTEM then HOST_SYSTEM_ARG="--host=${HOST_SYSTEM}"
-
 	if [ -n "$HOST_SYSTEM" ]; then
 		HOST_SYSTEM_ARG=--host=${HOST_SYSTEM}
 	fi
@@ -29,7 +27,10 @@ function autotools_configure
 	if [ -n "$PREFIX" ]; then
 		PREFIX_ARG=--prefix=${PREFIX}
 	fi
+}
 
+function autotools_configure
+{
 	./configure $PREFIX_ARG $HOST_SYSTEM_ARG ${1}
 }
 
@@ -43,7 +44,7 @@ function autotools_install
 	make install
 }
 
-function waf_setup_env
+function waf_set_env
 {
 	PREFIX_ARG=--prefix=${PREFIX}
 
@@ -70,23 +71,18 @@ function waf_setup_env
 	fi
 }
 
-function waf_configure
-{
-
-}
-
 function wafer_configure
 {
-	waf_setup_env
-	./wafer ${PKG_VERBOSE_OPTION} configure $PREFIX_ARG $C_COMPILER_ARG $CXX_COMPILER_ARG
+	waf_set_env
+	./wafer ${PKG_VERBOSE_OPTION} configure $PREFIX_ARG $C_COMPILER_ARG $CXX_COMPILER_ARG ${1}
 }
 
 function wafer_build
 {
-	./wafer ${PKG_VERBOSE_OPTION} build $SMP_MAKEFLAGS
+	./wafer ${PKG_VERBOSE_OPTION} build $SMP_MAKEFLAGS ${1}
 }
 
 function wafer_install
 {
-	./wafer ${PKG_VERBOSE_OPTION} install --destdir="$PKG_INSTALL_DIR"
+	./wafer ${PKG_VERBOSE_OPTION} install --destdir="$PKG_INSTALL_DIR" ${1}
 }

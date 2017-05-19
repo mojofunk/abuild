@@ -2,6 +2,7 @@
 
 . ./src/system.sh
 . ./src/toolset.sh
+. ./src/build_tool.sh
 . ./src/commands.sh
 . ./src/options.sh
 . ./src/package.sh
@@ -32,6 +33,8 @@ system_set_toolset_env
 
 # call function defined by package to setup environment
 set_pkg_env
+
+set_build_tool
 
 # Check that the package has set at least the required environment vars 
 check_pkg_env

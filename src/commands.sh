@@ -2,8 +2,6 @@
 
 function default_prep
 {
-	echo "Package $ABUILD_PKG_NAME using default prep"
-
 	cd $PKG_BUILD_ROOT_DIR || exit 1
 
 	if [ ! -d $PKG_NAME ]; then
@@ -24,43 +22,48 @@ function default_prep
 
 function prep
 {
+	echo "Package $ABUILD_PKG_NAME using default prep"
 	default_prep
 }
 
-function _default_configure
+function default_configure
 {
-	echo "Package $ABUILD_PKG_NAME using default prep"
+	cd "$PKG_BUILD_ROOT_DIR/$PKG_NAME" || exit 1
+	build_tool_configure
 }
 
 function configure
 {
-	_default_configure
+	echo "Package $ABUILD_PKG_NAME using default configure"
+	default_configure
 }
 
-function _default_build
+function default_build
 {
-	echo "Package $ABUILD_PKG_NAME using default build"
+	cd "$PKG_BUILD_ROOT_DIR/$PKG_NAME" || exit 1
+	build_tool_build
 }
 
 function build
 {
-	_default_build
+	echo "Package $ABUILD_PKG_NAME using default build"
+	default_build
 }
 
-function _default_install
+function default_install
 {
-	echo "Package $ABUILD_PKG_NAME using default install"
+	cd "$PKG_BUILD_ROOT_DIR/$PKG_NAME" || exit 1
+	build_tool_install
 }
 
 function install
 {
-	_default_install
+	echo "Package $ABUILD_PKG_NAME using default install"
+	default_install
 }
 
-function _default_package
+function default_package
 {
-	echo "Package $ABUILD_PKG_NAME using default package"
-
 	echo "Creating tarball from $PKG_INSTALL_DIR ..."
 	cd $PKG_INSTALL_DIR
 	echo "pwd: "
@@ -72,13 +75,12 @@ function _default_package
 
 function package
 {
-	_default_package
+	echo "Package $ABUILD_PKG_NAME using default package"
+	default_package
 }
 
-function _default_clean
+function default_clean
 {
-	echo "Package $ABUILD_PKG_NAME using default clean"
-
 	if [ -d "$PKG_BUILD_ROOT_DIR" ]; then
 		echo "Removing $PKG_BUILD_ROOT_DIR"
 		rm -rf "$PKG_BUILD_ROOT_DIR" || exit 1
@@ -92,7 +94,8 @@ function _default_clean
 
 function clean
 {
-	_default_clean
+	echo "Package $ABUILD_PKG_NAME using default clean"
+	default_clean
 }
 
 function process_command_sequence
