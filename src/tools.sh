@@ -42,3 +42,51 @@ function autotools_install
 {
 	make install
 }
+
+function waf_setup_env
+{
+	PREFIX_ARG=--prefix=${PREFIX}
+
+	if [ ${TOOLSET} == 'mingw' ]; then
+		C_COMPILER_NAME=gcc
+		CXX_COMPILER_NAME=g++
+	elif [ ${TOOLSET} == 'clang']; then
+		C_COMPILER_NAME=clang
+		CXX_COMPILER_NAME=clang++
+	elif [ ${TOOLSET} == 'msvc']; then
+		C_COMPILER_NAME=msvc
+		CXX_COMPILER_NAME=mvsc
+	elif [ ${TOOLSET} == 'gcc']; then
+		C_COMPILER_NAME=gcc
+		CXX_COMPILER_NAME=g++
+	fi
+
+	if [ -n "$C_COMPILER_NAME" ]; then
+		C_COMPILER_ARG=--check-c-compiler=${C_COMPILER_NAME}
+	fi
+
+	if [ -n "$CXX_COMPILER_NAME" ]; then
+		CXX_COMPILER_ARG=--check-cxx-compiler=${CXX_COMPILER_NAME}
+	fi
+}
+
+function waf_configure
+{
+
+}
+
+function wafer_configure
+{
+	waf_setup_env
+	./wafer ${PKG_VERBOSE_OPTION} configure $PREFIX_ARG $C_COMPILER_ARG $CXX_COMPILER_ARG
+}
+
+function wafer_build
+{
+	./wafer ${PKG_VERBOSE_OPTION} build $SMP_MAKEFLAGS
+}
+
+function wafer_install
+{
+	./wafer ${PKG_VERBOSE_OPTION} install --destdir="$PKG_INSTALL_DIR"
+}
