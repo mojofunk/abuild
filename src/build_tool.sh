@@ -79,7 +79,7 @@ function waf_set_env
 		LIBDIR_ARG="--libdir=${LIBDIR}"
 	fi
 
-	DESTDIR_ARG="--destdir=$PKG_INSTALL_DIR"
+	#DESTDIR_ARG="--destdir=C:\\"
 }
 
 function wafer_configure

@@ -67,3 +67,11 @@ function system_set_toolset_env {
 		_set_fedora_mingw_env
 	fi
 }
+
+function system_set_path_env
+{
+	# duplicate of above
+	export PREFIX=${PREFIX:='/'}
+	export LIBDIR=${LIBDIR:="${PREFIX}lib"}
+	#export PREFIX=${PREFIX:=$PKG_INSTALL_DIR}
+}
