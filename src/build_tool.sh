@@ -52,32 +52,31 @@ function autotools_install
 
 function waf_set_env
 {
-	PREFIX_ARG=--prefix=${PREFIX}
+	PREFIX_ARG="--prefix=${PREFIX}"
 
 	if [ ${TOOLSET} == 'mingw' ]; then
 		C_COMPILER_NAME=gcc
 		CXX_COMPILER_NAME=g++
-	elif [ ${TOOLSET} == 'clang']; then
+	elif [ ${TOOLSET} == 'clang' ]; then
 		C_COMPILER_NAME=clang
 		CXX_COMPILER_NAME=clang++
-	elif [ ${TOOLSET} == 'msvc']; then
+	elif [ ${TOOLSET} == 'msvc' ]; then
 		C_COMPILER_NAME=msvc
-		CXX_COMPILER_NAME=mvsc
-	elif [ ${TOOLSET} == 'gcc']; then
+	elif [ ${TOOLSET} == 'gcc' ]; then
 		C_COMPILER_NAME=gcc
 		CXX_COMPILER_NAME=g++
 	fi
 
 	if [ -n "$C_COMPILER_NAME" ]; then
-		C_COMPILER_ARG=--check-c-compiler=${C_COMPILER_NAME}
+		C_COMPILER_ARG="--check-c-compiler=${C_COMPILER_NAME}"
 	fi
 
 	if [ -n "$CXX_COMPILER_NAME" ]; then
-		CXX_COMPILER_ARG=--check-cxx-compiler=${CXX_COMPILER_NAME}
+		CXX_COMPILER_ARG="--check-cxx-compiler=${CXX_COMPILER_NAME}"
 	fi
 
 	if [ -n "$LIBDIR" ]; then
-		LIBDIR_ARG=--libdir=${LIBDIR}
+		LIBDIR_ARG="--libdir=${LIBDIR}"
 	fi
 
 	DESTDIR_ARG="--destdir=$PKG_INSTALL_DIR"
