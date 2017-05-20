@@ -31,8 +31,6 @@ function autotools_set_env
 	if [ -n "$PREFIX" ]; then
 		PREFIX_ARG=--prefix=${PREFIX}
 	fi
-
-	DESTDIR_ARG="DESTDIR=$PKG_INSTALL_DIR"
 }
 
 function autotools_configure
@@ -47,7 +45,7 @@ function autotools_build
 
 function autotools_install
 {
-	make $DESTDIR_ARG install
+	make install
 }
 
 function waf_set_env
@@ -78,8 +76,6 @@ function waf_set_env
 	if [ -n "$LIBDIR" ]; then
 		LIBDIR_ARG="--libdir=${LIBDIR}"
 	fi
-
-	#DESTDIR_ARG="--destdir=C:\\"
 }
 
 function wafer_configure
@@ -96,5 +92,5 @@ function wafer_build
 
 function wafer_install
 {
-	./wafer ${PKG_VERBOSE_OPTION} install $DESTDIR_ARG ${1}
+	./wafer ${PKG_VERBOSE_OPTION} install ${1}
 }
