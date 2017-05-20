@@ -44,8 +44,12 @@ function system_set_toolset_env
 
 function system_set_path_env
 {
-	echo "Using default system build environment"
+	echo "Using default system path environment"
 	export PREFIX=${PREFIX:=$PKG_INSTALL_DIR}
+	export LIBDIR=${LIBDIR:="$PKG_INSTALL_DIR/lib"}
+
+	echo "PREFIX : ${PREFIX}"
+	echo "LIBDIR : ${LIBDIR}"
 }
 
 function system_set_default_host_arch

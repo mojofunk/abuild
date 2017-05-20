@@ -59,9 +59,3 @@ function system_set_toolset_env {
 		_set_msys2_mingw_env
 	fi
 }
-
-function system_set_path_env
-{
-	export PREFIX=${PREFIX:="$PKG_INSTALL_DIR"}
-	export LIBDIR=${LIBDIR:="$PKG_INSTALL_DIR/lib"}
-}

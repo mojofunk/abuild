@@ -15,11 +15,6 @@ function _set_fedora_mingw_env ()
 
 	export PKG_CONFIG_PREFIX=${PKG_CONFIG_PREFIX:=$MINGW_ROOT}
 	export PKG_CONFIG_LIBDIR=${PKG_CONFIG_LIBDIR:=$MINGW_ROOT/lib/pkgconfig}
-	#export PKGCONFIG=${PKGCONFIG:=pkg-config}
-
-	# TODO this is only correct when using default PKG_INSTALL_DIR
-	export PREFIX=${PREFIX:='/'}
-	export LIBDIR=${LIBDIR:="${PREFIX}lib"}
 }
 
 function system_is_detected ()
@@ -66,12 +61,4 @@ function system_set_toolset_env {
 	if [ "$TOOLSET" == 'mingw' ]; then
 		_set_fedora_mingw_env
 	fi
-}
-
-function system_set_path_env
-{
-	# duplicate of above
-	export PREFIX=${PREFIX:='/'}
-	export LIBDIR=${LIBDIR:="${PREFIX}lib"}
-	#export PREFIX=${PREFIX:=$PKG_INSTALL_DIR}
 }
