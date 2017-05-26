@@ -3,7 +3,7 @@
 function set_build_tool
 {
 	if [ -z ${PKG_BUILD_TOOL+x} ]; then
-		echo "${PKG_BUILD_TOOL} not set by ${PKG_NAME}"
+		echo "PKG_BUILD_TOOL variable not set by ${PKG_NAME}"
 		return
 	fi
 
