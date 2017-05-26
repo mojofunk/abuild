@@ -25,6 +25,8 @@ check_system_env
 
 print_system_env
 
+system_install_required_tools
+
 # export environment based on build system and host/compiler
 set_toolset
 

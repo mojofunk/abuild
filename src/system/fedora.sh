@@ -36,6 +36,23 @@ function system_is_detected ()
 	return 1
 }
 
+function system_install_build_tools
+{
+	echo "Installing $BUILD_SYSTEM build tools"
+
+	DNF=dnf
+
+	sudo $DNF group install -y "Development Tools"
+
+	COMMON_DEPS="git gitk"
+
+	sudo $DNF install -y $COMMON_DEPS
+
+	MINGW_DEPS="mingw*gcc mingw*gcc-c++"
+
+	sudo $DNF install -y $MINGW_DEPS
+}
+
 function system_toolset_supported ()
 {
 	if [ "$TOOLSET" == 'gcc' ]; then
@@ -49,8 +66,9 @@ function system_toolset_supported ()
 }
 
 function system_set_default_host_arch {
-	UNAME_ARCH=`uname -i`
-	: ${HOST_ARCH:="$UNAME_ARCH"}
+	#UNAME_ARCH=`uname -i`
+	#: ${HOST_ARCH:="$UNAME_ARCH"}
+	echo "No default HOST_ARCH set"
 }
 
 function system_set_default_toolset {

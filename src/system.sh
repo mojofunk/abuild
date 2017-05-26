@@ -29,6 +29,17 @@ function print_system_env
 
 # The system API/Interface
 
+function system_install_required_tools
+{
+	if [ ! -f "$ABUILD_ROOT_PATH/.system" ] || [ "$ABUILD_FORCE_INSTALL" == true ]; then
+		echo "Installing required build dependencies on $BUILD_SYSTEM..."
+		system_install_build_tools
+		touch "$ABUILD_ROOT_PATH/.system"
+	else
+		echo "Required build dependencies already installed on $BUILD_SYSTEM..."
+	fi
+}
+
 # Setup required environment variables
 function system_set_env
 {
