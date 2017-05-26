@@ -9,9 +9,11 @@
 . ./src/common_env.sh
 . ./src/utils.sh
 
+set_common_env
+
 parse_options $@
 
-set_common_env
+set_pkg_path_env
 
 check_pkg_file
 

@@ -1,5 +1,11 @@
 #!/bin/bash
 
+function set_pkg_path_env
+{
+	ABUILD_PKG_DIRECTORY="$ABUILD_ROOT_PATH/packages/$ABUILD_PKG_NAME"
+	ABUILD_PKG_FILE="$ABUILD_PKG_DIRECTORY/ABUILD"
+}
+
 function check_pkg_env
 {
 	if [ -z "${PKG_NAME}" ]; then
