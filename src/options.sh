@@ -48,6 +48,9 @@ function parse_options
 		s)
 			ABUILD_SINGLE_COMMAND=1
 			;;
+		?)
+			exit 1
+			;;
 		esac
 	done
 	shift "$((OPTIND-1))"
