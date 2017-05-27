@@ -1,17 +1,17 @@
 #!/bin/bash
 
-function _set_msys2_common_env ()
+function _set_msys2_common_env
 {
 	export PYTHON=/usr/bin/python3
 }
 
-function _set_msys2_mingw_env ()
+function _set_msys2_mingw_env
 {
 	_set_msys2_common_env
 	export WINRC=windres
 }
 
-function system_is_detected ()
+function system_is_detected
 {
 	if [ -n "${MSYSTEM}" ]; then
 		BUILD_SYSTEM='MSYS2'
@@ -21,7 +21,7 @@ function system_is_detected ()
 	return 1
 }
 
-function system_set_default_host_arch ()
+function system_set_default_host_arch
 {
 	if [ "${MSYSTEM}" == 'MINGW64' ]; then
 		HOST_ARCH="x86_64"
@@ -30,7 +30,7 @@ function system_set_default_host_arch ()
 	fi
 }
 
-function system_toolset_supported ()
+function system_toolset_supported
 {
 	if [ "$TOOLSET" == 'mingw' ]; then
 		return 0
@@ -40,7 +40,7 @@ function system_toolset_supported ()
 	return 1
 }
 
-function system_set_build_env ()
+function system_set_build_env
 {
 	if [ "$TOOLSET" == 'mingw' ]; then
 		_set_msys2_mingw_env
@@ -49,12 +49,13 @@ function system_set_build_env ()
 	fi
 }
 
-function system_set_default_toolset ()
+function system_set_default_toolset
 {
 	TOOLSET='mingw'
 }
 
-function system_set_toolset_env {
+function system_set_toolset_env
+{
 	if [ "$TOOLSET" == 'mingw' ]; then
 		_set_msys2_mingw_env
 	fi

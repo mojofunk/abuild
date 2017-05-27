@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function set_toolset ()
+function set_toolset
 {
 	if [ -z ${TOOLSET+x} ]; then
 		system_set_default_toolset

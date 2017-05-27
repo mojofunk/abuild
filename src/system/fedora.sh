@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function _set_fedora_mingw_env ()
+function _set_fedora_mingw_env
 {
 	export AR=${AR:=$HOST_SYSTEM-ar}
 	export RANLIB=${RANLIB:=$HOST_SYSTEM-ranlib}
@@ -17,7 +17,7 @@ function _set_fedora_mingw_env ()
 	export PKG_CONFIG_LIBDIR=${PKG_CONFIG_LIBDIR:=$MINGW_ROOT/lib/pkgconfig}
 }
 
-function system_is_detected ()
+function system_is_detected
 {
 	if [ -f /etc/system-release ]; then
 		if [ $(grep -ow -E [[:digit:]]+ /etc/system-release) == "19" ]; then
@@ -53,7 +53,7 @@ function system_install_build_tools
 	sudo $DNF install -y $MINGW_DEPS
 }
 
-function system_toolset_supported ()
+function system_toolset_supported
 {
 	if [ "$TOOLSET" == 'gcc' ]; then
 		return 0
@@ -65,17 +65,20 @@ function system_toolset_supported ()
 	return 1
 }
 
-function system_set_default_host_arch {
+function system_set_default_host_arch
+{
 	#UNAME_ARCH=`uname -i`
 	#: ${HOST_ARCH:="$UNAME_ARCH"}
 	echo "No default HOST_ARCH set"
 }
 
-function system_set_default_toolset {
+function system_set_default_toolset
+{
 	TOOLSET='gcc'
 }
 
-function system_set_toolset_env {
+function system_set_toolset_env
+{
 	if [ "$TOOLSET" == 'mingw' ]; then
 		_set_fedora_mingw_env
 	fi
