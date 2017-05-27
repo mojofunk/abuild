@@ -13,8 +13,9 @@ function _set_fedora_mingw_env
 	export WINRC=${WINRC:=$HOST_SYSTEM-windres}
 	export STRIP=${STRIP:=$HOST_SYSTEM-strip}
 
-	export PKG_CONFIG_PREFIX=${PKG_CONFIG_PREFIX:=$MINGW_ROOT}
-	export PKG_CONFIG_LIBDIR=${PKG_CONFIG_LIBDIR:=$MINGW_ROOT/lib/pkgconfig}
+	# we don't really want to use system mingw packages
+	#export PKG_CONFIG_PREFIX=${PKG_CONFIG_PREFIX:=$MINGW_ROOT}
+	#export PKG_CONFIG_LIBDIR=${PKG_CONFIG_LIBDIR:=$MINGW_ROOT/lib/pkgconfig}
 }
 
 function system_is_detected
