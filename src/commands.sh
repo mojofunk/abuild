@@ -15,6 +15,8 @@ function default_prep
 			download_source_and_unpack
 		fi
 	fi
+
+	cd "$PKG_BUILD_ROOT_DIR/$PKG_NAME" || exit 1
 }
 
 function prep
