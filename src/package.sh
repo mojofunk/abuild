@@ -95,17 +95,15 @@ function process_pkg_deps
 	for pkg in $PKG_DEPS
 	do
 		if [ ! -e "$ABUILD_PKG_CACHE_DIR/$pkg" ]; then
-			echo "Building package dependency $pkg"
+			echo "Building and Installing package dependency $pkg"
 
 			$ABUILD_SCRIPT_PATH -t $TOOLSET $ABUILD_VERBOSE_OPTION \
 			                    $PKG_VERBOSE_OPTION $PKG_DEBUG_OPTION \
-			                    -i $PKG_INSTALL_DIR $ABUILD_PKG_COMMAND \
+			                    -i $PKG_INSTALL_DIR install \
 			                    $pkg || exit 1
 
-			if [ $ABUILD_PKG_COMMAND == 'install' ]; then
-				mkdir -p "$ABUILD_PKG_CACHE_DIR"
-				touch "$ABUILD_PKG_CACHE_DIR/$pkg"
-			fi
+			mkdir -p "$ABUILD_PKG_CACHE_DIR"
+			touch "$ABUILD_PKG_CACHE_DIR/$pkg"
 		else
 			echo "Package dependency $pkg already installed"
 		fi
