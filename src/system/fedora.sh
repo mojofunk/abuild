@@ -67,9 +67,7 @@ function system_toolset_supported
 
 function system_set_default_host_arch
 {
-	#UNAME_ARCH=`uname -i`
-	#: ${HOST_ARCH:="$UNAME_ARCH"}
-	echo "No default HOST_ARCH set"
+	: ${HOST_ARCH:=i686}
 }
 
 function system_set_default_toolset
