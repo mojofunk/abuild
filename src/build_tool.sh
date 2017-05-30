@@ -83,11 +83,16 @@ function waf_set_env
 	fi
 }
 
+function wafer_set_env
+{
+	TOOLSET_ARG="--toolset=${TOOLSET}"
+}
+
 function wafer_configure
 {
 	waf_set_env
-	./wafer ${PKG_VERBOSE_OPTION} configure $PREFIX_ARG $LIBDIR_ARG \
-	                                        $C_COMPILER_ARG $CXX_COMPILER_ARG ${1}
+	wafer_set_env
+	./wafer ${PKG_VERBOSE_OPTION} configure $TOOLSET_ARG $PREFIX_ARG $LIBDIR_ARG ${1}
 }
 
 function wafer_build
