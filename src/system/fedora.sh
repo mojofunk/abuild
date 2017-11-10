@@ -20,7 +20,7 @@ function _set_fedora_mingw_env
 
 function system_is_detected
 {
-	if [ -f /etc/system-release ]; then
+	if [ -f /etc/fedora-release ]; then
 		if [ $(grep -ow -E [[:digit:]]+ /etc/system-release) == "19" ]; then
 			BUILD_SYSTEM='Fedora-19'
 		elif [ $(grep -ow -E [[:digit:]]+ /etc/system-release) == "20" ]; then
@@ -30,6 +30,7 @@ function system_is_detected
 		elif [ $(grep -ow -E [[:digit:]]+ /etc/system-release) == "24" ]; then
 			BUILD_SYSTEM='Fedora-24'
 		fi
+			BUILD_SYSTEM='Fedora'
 			BUILD_SYSTEM_FEDORA=1
 		return 0
 	fi
