@@ -43,7 +43,7 @@ function set_pkg_source_dir_env
 
 	: ${PKG_SRC_ROOT_DIR:="$PKG_DEFAULT_SRC_ROOT_DIR"}
 
-	echo "Using package source root directory $PKG_BUILD_ROOT_DIR"
+	echo "Using package source root directory $PKG_SRC_ROOT_DIR"
 }
 
 function set_pkg_build_dir_env
