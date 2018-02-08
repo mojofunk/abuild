@@ -15,10 +15,15 @@ function print_usage
 	echo "<command> : prep, configure, build, install, package, clean"
 }
 
+function print_packages
+{
+	ls -1 packages
+}
+
 function parse_options
 {
 	OPTIND=1
-	while getopts "h?t:dfvVsi:" opt; do
+	while getopts "h?t:dflvVsi:" opt; do
 		case "$opt" in
 		h)
 			print_usage
@@ -41,6 +46,11 @@ function parse_options
 			;;
 		f)
 			ABUILD_FORCE_INSTALL=true
+			;;
+		l)
+			# TODO
+			print_packages
+			exit 0
 			;;
 		i)
 			PKG_INSTALL_DIR=$OPTARG
