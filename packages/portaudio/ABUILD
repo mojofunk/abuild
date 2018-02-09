@@ -13,7 +13,7 @@ function configure ()
 {
 	cd "$PKG_BUILD_ROOT_DIR/$PKG_NAME" || exit 1
 
-	WAFER_ARGS="--enable-static --enable-shared \
+	WAFER_ARGS="--enable-shared \
 	            --with-directx --with-wdmks --with-wasapi \
 	            --with-tests --with-examples"
 
