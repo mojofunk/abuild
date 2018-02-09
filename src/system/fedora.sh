@@ -24,28 +24,13 @@ function system_is_detected
 
 function system_install_build_tools
 {
-	echo "Installing $BUILD_SYSTEM build tools"
-
 	DNF=dnf
-
-	sudo $DNF group install -y "Development Tools"
-
-	COMMON_DEPS="git gitk"
-
-	sudo $DNF install -y $COMMON_DEPS
-
-	MINGW_DEPS="mingw*gcc mingw*gcc-c++"
-
-	sudo $DNF install -y $MINGW_DEPS
+	_fedora_system_install_build_tools
 }
 
 function system_toolset_supported
 {
-	if [ "$TOOLSET" == 'gcc' ]; then
-		return 0
-	elif [ "$TOOLSET" == 'clang' ]; then
-		return 0
-	elif [ "$TOOLSET" == 'mingw' ]; then
+	if _fedora_system_toolset_supported; then
 		return 0
 	fi
 	return 1
@@ -53,17 +38,15 @@ function system_toolset_supported
 
 function system_set_default_host_arch
 {
-	: ${HOST_ARCH:=i686}
+	_fedora_system_set_default_host_arch
 }
 
 function system_set_default_toolset
 {
-	TOOLSET='gcc'
+	_fedora_system_set_default_toolset
 }
 
 function system_set_toolset_env
 {
-	if [ "$TOOLSET" == 'mingw' ]; then
-		_set_fedora_mingw_env
-	fi
+	_fedora_system_set_toolset_env
 }
