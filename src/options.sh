@@ -20,11 +20,28 @@ function print_packages
 	ls -1 packages
 }
 
+function check_host_arch
+{
+	if [ "$HOST_ARCH" == "i686" ]; then
+		:
+	elif [ "$HOST_ARCH" == "x86_64" ]; then
+		:
+	else
+		echo "Unsupported HOST_ARCH specified : $HOST_ARCH"
+		exit 1
+	fi
+	echo "HOST_ARCH set to : $HOST_ARCH"
+}
+
 function parse_options
 {
 	OPTIND=1
-	while getopts "h?t:dflvVsi:" opt; do
+	while getopts "a:h?t:dflvVsi:" opt; do
 		case "$opt" in
+		a)
+			HOST_ARCH=$OPTARG
+			check_host_arch
+			;;
 		h)
 			print_usage
 			exit 0

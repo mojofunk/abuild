@@ -97,7 +97,7 @@ function process_pkg_deps
 		if [ ! -e "$ABUILD_PKG_CACHE_DIR/$pkg" ]; then
 			echo "Building and Installing package dependency $pkg"
 
-			$ABUILD_SCRIPT_PATH -t $TOOLSET $ABUILD_VERBOSE_OPTION \
+			$ABUILD_SCRIPT_PATH -a $HOST_ARCH -t $TOOLSET $ABUILD_VERBOSE_OPTION \
 			                    $PKG_VERBOSE_OPTION $PKG_DEBUG_OPTION \
 			                    -i $PKG_INSTALL_DIR install \
 			                    $pkg || exit 1
