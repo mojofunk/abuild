@@ -1,0 +1,19 @@
+Add an PKG_RELEASE environment variable and use it in install package
+name
+
+Instead of touching a file in the root directory to indicate a package
+has been installed, add a directory to
+$INSTALL_PATH/share/abuild/$PKG_NAME and then add the ABUILD file used
+to build the package and possibly add an ACONFIG file that contains the
+environment variables used for the build
+
+Add argument to not process dependencies
+
+Where we want to use binary versions, specify a list of the runtime
+files to copy into the PREFIX.
+
+if MSYS2 and SYSTEM_RUNTIME copy dll's etc to PKG_INSTALL_DIR
+
+Add arch -a argument i686/x86_64/etc
+
+Support abuild.sh clean to clean all BUILD/INSTALL/etc dirs
