@@ -33,6 +33,14 @@ function check_host_arch
 	echo "HOST_ARCH set to : $HOST_ARCH"
 }
 
+function clean_all
+{
+	echo "Removing all directories created by abuild..."
+	rm -rf "$ABUILD_ROOT_PATH_BUILD"
+	rm -rf "$ABUILD_ROOT_PATH_INSTALL"
+	rm -rf "$ABUILD_ROOT_PATH_SOURCE"
+}
+
 function parse_options
 {
 	OPTIND=1
@@ -81,6 +89,11 @@ function parse_options
 		esac
 	done
 	shift "$((OPTIND-1))"
+
+	if [ "$1" == "clean-all" ]; then
+		clean_all
+		exit 0
+	fi
 
 	if [ -z $1 ] || [ -z $2 ]; then
 		print_usage
