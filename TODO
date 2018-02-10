@@ -13,7 +13,3 @@ Where we want to use binary versions, specify a list of the runtime
 files to copy into the PREFIX.
 
 if MSYS2 and SYSTEM_RUNTIME copy dll's etc to PKG_INSTALL_DIR
-
-Add arch -a argument i686/x86_64/etc
-
-Support abuild.sh clean to clean all BUILD/INSTALL/etc dirs
