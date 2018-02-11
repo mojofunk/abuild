@@ -48,7 +48,7 @@ function set_pkg_source_dir_env
 
 function set_pkg_build_dir_env
 {
-	if [ -n "$ABUILD_PKG_ENABLE_DEBUG" ]; then
+	if [ -n "$PKG_DEBUG_ENABLE" ]; then
 		PKG_DEFAULT_BUILD_ROOT_DIR_NAME="${TOOLSET}-${HOST_ARCH}-dbg"
 	else
 		PKG_DEFAULT_BUILD_ROOT_DIR_NAME="${TOOLSET}-${HOST_ARCH}"
@@ -63,7 +63,7 @@ function set_pkg_build_dir_env
 
 function set_pkg_install_dir_env
 {
-	if [ -n "$ABUILD_PKG_ENABLE_DEBUG" ]; then
+	if [ "$PKG_DEBUG_ENABLE" ]; then
 		PKG_INSTALL_DIR_NAME="${PKG_NAME}-${PKG_VERSION}-${TOOLSET}-${HOST_ARCH}-dbg"
 	else
 		PKG_INSTALL_DIR_NAME="${PKG_NAME}-${PKG_VERSION}-${TOOLSET}-${HOST_ARCH}"
