@@ -1,0 +1,13 @@
+#!/bin/bash
+
+function set_pkg_env
+{
+	PKG_NAME="expat"
+	PKG_VERSION="2.2.5"
+
+	PKG_SRC_DIR="${PKG_NAME}-${PKG_VERSION}"
+	PKG_SRC_FILE="${PKG_SRC_DIR}.tar.bz2"
+	PKG_SRC_URL="https://github.com/libexpat/libexpat/releases/download/R_2_2_5/${PKG_SRC_FILE}"
+
+	PKG_BUILD_TOOL="autotools"
+}
