@@ -2,9 +2,22 @@
 
 function set_mingw_default_build_env
 {
-	: ${HOST_ARCH:="i686"}
+	# These two are more like system properties than toolset
 	: ${HOST_SYSTEM:="${HOST_ARCH}-w64-mingw32"}
 	: ${MINGW_ROOT:="/usr/$HOST_SYSTEM/sys-root/mingw"}
+
+	if [ -z "${CFLAGS}" ]; then
+		if [ -n "$PKG_DEBUG_ENABLE" ]; then
+			GLOBAL_CFLAGS="-O0 -g"
+		else
+			GLOBAL_CFLAGS="-O2"
+		fi
+	fi
+
+	export CPPFLAGS="-I${PREFIX}/include $CPPFLAGS"
+	export CFLAGS="-I${PREFIX}/include ${GLOBAL_CFLAGS} -mstackrealign ${CFLAGS}"
+	export CXXFLAGS="-I${PREFIX}/include ${GLOBAL_CFLAGS} -mstackrealign ${CXXFLAGS}"
+	export LDFLAGS="-L${PREFIX}/lib ${LDFLAGS}"
 }
 
 function set_mingw_default_toolset_env
