@@ -1,0 +1,15 @@
+#!/bin/bash
+
+function set_pkg_env
+{
+	PKG_NAME="gettext"
+	PKG_VERSION="0.19.8.1"
+
+	PKG_SRC_DIR="${PKG_NAME}-${PKG_VERSION}"
+	PKG_SRC_FILE="${PKG_SRC_DIR}.tar.xz"
+	PKG_SRC_URL="https://ftp.gnu.org/pub/gnu/gettext/${PKG_SRC_FILE}"
+
+	PKG_DEPS="libiconv"
+
+	PKG_BUILD_TOOL="autotools"
+}
