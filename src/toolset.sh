@@ -10,7 +10,10 @@ function set_toolset
 			exit 1
 		fi
 	fi
+}
 
+function set_toolset_env
+{
 	TOOLSET_FILE="${ABUILD_SRC_PATH}/toolset/${TOOLSET}.sh"
 	if [ -f ${TOOLSET_FILE} ];then
 		. ${TOOLSET_FILE}

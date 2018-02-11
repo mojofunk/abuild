@@ -30,8 +30,6 @@ system_install_required_tools
 # export environment based on build system and host/compiler
 set_toolset
 
-system_set_toolset_env
-
 # source the package file to get variables and functions
 . $ABUILD_PKG_FILE
 
@@ -49,6 +47,10 @@ set_pkg_build_dir_env
 set_pkg_install_dir_env
 
 system_set_path_env
+
+set_toolset_env
+
+system_set_toolset_env
 
 set_build_tool
 
