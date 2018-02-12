@@ -1,0 +1,62 @@
+#!/bin/bash
+
+function set_pkg_env
+{
+	PKG_NAME="fftw"
+	PKG_VERSION="3.3.7"
+
+	PKG_SRC_DIR="${PKG_NAME}-${PKG_VERSION}"
+	PKG_SRC_FILE="${PKG_SRC_DIR}.tar.gz"
+	PKG_SRC_URL="http://www.fftw.org/${PKG_SRC_FILE}"
+
+	PKG_BUILD_TOOL="autotools"
+}
+
+function configure
+{
+	cd "$PKG_BUILD_DIR" || exit 1
+
+	# The default fftw build is for double precision
+
+	PKG_BUILD_FLOAT_DIR="$PKG_BUILD_DIR"-float
+
+	COMMON_OPTIONS="--enable-shared --disable-dependency-tracking --disable-doc --disable-mpi --enable-threads --with-combined-threads --with-our-malloc --enable-sse2 --enable-avx"
+
+	FLOAT_OPTIONS="--enable-float"
+
+	cd $PKG_BUILD_ROOT_DIR # ../
+
+	cp -r $PKG_BUILD_DIR $PKG_BUILD_FLOAT_DIR || exit
+
+	cd - || exit
+
+	autotools_configure "$COMMON_OPTIONS"
+
+	cd $PKG_BUILD_FLOAT_DIR
+
+	autotools_configure "$COMMON_OPTIONS $FLOAT_OPTIONS"
+
+	cd - || exit
+}
+
+function build
+{
+	cd "$PKG_BUILD_DIR" || exit 1
+
+	autotools_build
+
+	cd "$PKG_BUILD_FLOAT_DIR" || exit 1
+
+	autotools_build
+}
+
+function install
+{
+	cd "$PKG_BUILD_DIR" || exit 1
+
+	autotools_install
+
+	cd "$PKG_BUILD_FLOAT_DIR" || exit 1
+
+	autotools_install
+}
