@@ -1,0 +1,15 @@
+#!/bin/bash
+
+function set_pkg_env
+{
+	PKG_NAME="cairomm"
+	PKG_VERSION="1.11.2"
+
+	PKG_SRC_DIR="${PKG_NAME}-${PKG_VERSION}"
+	PKG_SRC_FILE="${PKG_SRC_DIR}.tar.gz"
+	PKG_SRC_URL="http://cairographics.org/releases/${PKG_SRC_FILE}"
+
+	PKG_DEPS="cairo libsigc++"
+
+	PKG_BUILD_TOOL="autotools"
+}
