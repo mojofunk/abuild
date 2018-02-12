@@ -1,0 +1,15 @@
+#!/bin/bash
+
+function set_pkg_env
+{
+	PKG_NAME="pango"
+	PKG_VERSION="1.40.2"
+
+	PKG_SRC_DIR="${PKG_NAME}-${PKG_VERSION}"
+	PKG_SRC_FILE="${PKG_SRC_DIR}.tar.xz"
+	PKG_SRC_URL="http://ftp.gnome.org/pub/GNOME/sources/pango/1.40/${PKG_SRC_FILE}"
+
+	PKG_DEPS="glib cairo"
+
+	PKG_BUILD_TOOL="autotools"
+}
