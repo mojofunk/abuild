@@ -58,7 +58,10 @@ function set_pkg_build_dir_env
 
 	: ${PKG_BUILD_ROOT_DIR:="$PKG_DEFAULT_BUILD_ROOT_DIR"}
 
+	PKG_BUILD_DIR="$PKG_BUILD_ROOT_DIR/$PKG_NAME"
+
 	echo "Using package build root directory $PKG_BUILD_ROOT_DIR"
+	echo "Using package build directory $PKG_BUILD_DIR"
 }
 
 function set_pkg_install_dir_env
