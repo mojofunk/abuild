@@ -1,0 +1,22 @@
+#!/bin/bash
+
+function set_pkg_env
+{
+	PKG_NAME='sratom'
+	PKG_VERSION='0.6.0'
+
+	PKG_SRC_DIR="${PKG_NAME}-${PKG_VERSION}"
+	PKG_SRC_FILE="${PKG_SRC_DIR}.tar.bz2"
+	PKG_SRC_URL="http://download.drobilla.net/${PKG_SRC_FILE}"
+
+	PKG_DEPS="lv2 serd sord"
+
+	PKG_BUILD_TOOL='waf'
+}
+
+function install
+{
+	waf_install
+
+	mv "$PKG_LIB_DIR"/sratom*.dll $PKG_BIN_DIR
+}
