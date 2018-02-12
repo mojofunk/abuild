@@ -88,6 +88,7 @@ function set_pkg_install_dir_env
 	# not sure if this is the best place for this but it can only be set
 	# after the install path has been determined
 	export PKG_CONFIG_PATH=${PKG_INSTALL_DIR}/lib/pkgconfig
+	export PKG_CONFIG_LIBDIR=${PKG_CONFIG_PATH}
 }
 
 function process_pkg_deps
