@@ -16,7 +16,7 @@ function default_prep
 		fi
 	fi
 
-	cd "$PKG_BUILD_ROOT_DIR/$PKG_NAME" || exit 1
+	cd "$PKG_BUILD_DIR" || exit 1
 }
 
 function prep
@@ -27,7 +27,7 @@ function prep
 
 function default_configure
 {
-	cd "$PKG_BUILD_ROOT_DIR/$PKG_NAME" || exit 1
+	cd "$PKG_BUILD_DIR" || exit 1
 	build_tool_configure
 }
 
@@ -39,7 +39,7 @@ function configure
 
 function default_build
 {
-	cd "$PKG_BUILD_ROOT_DIR/$PKG_NAME" || exit 1
+	cd "$PKG_BUILD_DIR" || exit 1
 	build_tool_build
 }
 
@@ -51,7 +51,7 @@ function build
 
 function default_install
 {
-	cd "$PKG_BUILD_ROOT_DIR/$PKG_NAME" || exit 1
+	cd "$PKG_BUILD_DIR" || exit 1
 	build_tool_install
 }
 
