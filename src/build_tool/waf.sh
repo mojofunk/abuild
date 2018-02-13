@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. $ABUILD_SRC_PATH/build_tool/waf_private.sh
+. "$BUILD_TOOL_DIR"/waf_private.sh
 
 function build_tool_set_env
 {
