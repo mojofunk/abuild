@@ -28,19 +28,21 @@ function waf_set_env
 	if [ -n "$LIBDIR" ]; then
 		LIBDIR_ARG="--libdir=${LIBDIR}"
 	fi
+
+	#PYTHON=python3
 }
 
 function waf_configure
 {
-	./waf ${PKG_VERBOSE_OPTION} configure $PREFIX_ARG $LIBDIR_ARG ${1}
+	$PYTHON waf ${PKG_VERBOSE_OPTION} configure $PREFIX_ARG $LIBDIR_ARG ${1}
 }
 
 function waf_build
 {
-	./waf ${PKG_VERBOSE_OPTION} build $SMP_MAKEFLAGS ${1}
+	$PYTHON waf ${PKG_VERBOSE_OPTION} build $SMP_MAKEFLAGS ${1}
 }
 
 function waf_install
 {
-	./waf ${PKG_VERBOSE_OPTION} install ${1}
+	$PYTHON waf ${PKG_VERBOSE_OPTION} install ${1}
 }
