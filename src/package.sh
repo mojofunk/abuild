@@ -82,6 +82,7 @@ function set_pkg_install_dir_env
 
 	PKG_BIN_DIR=$PKG_INSTALL_DIR/bin
 	PKG_LIB_DIR=$PKG_INSTALL_DIR/lib
+	PKG_INC_DIR=$PKG_INSTALL_DIR/include
 	PKG_ETC_DIR=$PKG_INSTALL_DIR/etc
 	PKG_SHARE_DIR=$PKG_INSTALL_DIR/share
 
