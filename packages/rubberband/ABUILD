@@ -1,0 +1,33 @@
+#!/bin/bash
+
+function set_pkg_env
+{
+	PKG_NAME="rubberband"
+	PKG_VERSION="1.8.1"
+
+	PKG_SRC_DIR="${PKG_NAME}-${PKG_VERSION}"
+	PKG_SRC_FILE="${PKG_SRC_DIR}.tar.bz2"
+	PKG_SRC_URL="http://code.breakfastquay.com/attachments/download/34/${PKG_SRC_FILE}"
+
+	PKG_DEPS="libsamplerate libsndfile fftw ladspa vamp-plugin-sdk"
+
+	PKG_BUILD_TOOL="autotools"
+}
+
+function configure
+{
+	cd "$PKG_BUILD_DIR" || exit 1
+
+if [ "$TOOLSET" = 'mingw' ]; then
+ed Makefile.in << EOF
+%s/= ar/= ${HOST_SYSTEM}-ar/
+wq
+EOF
+ed rubberband.pc.in << EOF
+%s/ -lrubberband/ -lrubberband -lfftw3/
+wq
+EOF
+fi
+
+	autotools_configure
+}
