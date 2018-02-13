@@ -32,7 +32,6 @@ function waf_set_env
 
 function waf_configure
 {
-	waf_set_env
 	./waf ${PKG_VERBOSE_OPTION} configure $PREFIX_ARG $LIBDIR_ARG ${1}
 }
 
