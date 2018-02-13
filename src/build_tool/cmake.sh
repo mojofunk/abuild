@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. "${BUILD_TOOL_DIR}"/make_private.sh
+
 function cmake_set_env
 {
 	if [ "$TOOLSET" == "mingw" ]; then
@@ -19,7 +21,7 @@ function cmake_set_env
 
 	CMAKE_BUILD_DIR="cmakebuild"
 
-	: ${SMP_MAKEFLAGS:="-j4"}
+	make_set_env
 }
 
 function cmake_configure
