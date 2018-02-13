@@ -13,6 +13,8 @@ default and add a -r(recursive) argument.
 Add argument to link to system libs(via pkg-config) if installed or just
 prefix PKG_CONFIG_PATH and PKG_CONFIG_LIBDIR?
 
+Add argument to prefer checkout over release
+
 Where we want to use binary versions, specify a list of the runtime
 files to copy into the PREFIX.
 
