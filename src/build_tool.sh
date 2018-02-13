@@ -7,7 +7,9 @@ function set_build_tool
 		return
 	fi
 
-	BUILD_TOOL_FILE="${ABUILD_SRC_PATH}/build_tool/${PKG_BUILD_TOOL}.sh"
+	BUILD_TOOL_DIR="${ABUILD_SRC_PATH}/build_tool"
+
+	BUILD_TOOL_FILE="${BUILD_TOOL_DIR}/${PKG_BUILD_TOOL}.sh"
 	if [ -f ${BUILD_TOOL_FILE} ]; then
 		. ${BUILD_TOOL_FILE}
 		build_tool_set_env
