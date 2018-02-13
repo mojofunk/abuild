@@ -1,0 +1,62 @@
+#!/bin/bash
+
+function set_pkg_env
+{
+	PKG_NAME="boost"
+	PKG_VERSION="1.56.0"
+
+	PKG_SRC_DIR="boost_1_56_0"
+	PKG_SRC_FILE="boost_1_56_0.tar.bz2"
+	PKG_SRC_URL="http://sourceforge.net/projects/boost/files/boost/${PKG_VERSION}/${PKG_SRC_FILE}"
+
+	# TODO
+	#PKG_DEPS="zlib bzip2"
+}
+
+function configure
+{
+	cd "$PKG_BUILD_DIR" || exit 1
+
+	if [ ! -f user-config.jam ]; then
+cat >> user-config.jam << EOF
+using gcc : : ${CXX} ;
+EOF
+	fi
+
+	# --with-icu=${PREFIX}
+	./bootstrap.sh --prefix=${PREFIX}
+}
+
+function build
+{
+	cd "$PKG_BUILD_DIR" || exit 1
+
+	: ${SMP_MAKEFLAGS:="-j4"}
+
+	#-d+2 -q pch=off -q --build-dir=serial
+	B2_COMMON_ARGS="--layout=tagged --without-mpi --without-graph_parallel \
+	--without-python threading=multi link=shared runtime-link=shared"
+
+	if [ "$PKG_DEBUG_BUILD" ]; then
+		B2_VARIANT_ARG="variant=debug"
+		B2_DEBUG_SYMBOLS_ARG="debug-symbols=on"
+	else
+		B2_VARIANT_ARG="variant=release"
+	fi
+
+	if [ "$TOOLSET" == 'mingw' ]; then
+		B2_TARGET_OS_ARG="target-os=windows threadapi=win32"
+	fi
+
+	B2_ALL_COMMON_ARGS="$B2_COMMON_ARGS $B2_VARIANT_ARG $B2_TARGET_OS_ARG $B2_DEBUG_SYMBOLS_ARG"
+
+	./b2 $B2_ALL_COMMON_ARGS $SMP_MAKEFLAGS --user-config=user-config.jam stage \
+	|| echo "Boost build only partly successful"
+}
+
+function install {
+	cd "$PKG_BUILD_DIR" || exit 1
+
+	./b2 --prefix=$PREFIX $B2_ALL_COMMON_ARGS --user-config=user-config.jam install \
+	|| echo "Boost install only partly successful"
+}
