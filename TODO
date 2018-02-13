@@ -7,7 +7,11 @@ $INSTALL_PATH/share/abuild/$PKG_NAME and then add the ABUILD file used
 to build the package and possibly add an ACONFIG file that contains the
 environment variables used for the build
 
-Add argument to not process dependencies
+Add argument to not process dependencies, or don't process deps by
+default and add a -r(recursive) argument.
+
+Add argument to link to system libs(via pkg-config) if installed or just
+prefix PKG_CONFIG_PATH and PKG_CONFIG_LIBDIR?
 
 Where we want to use binary versions, specify a list of the runtime
 files to copy into the PREFIX.
