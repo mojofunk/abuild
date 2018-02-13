@@ -18,5 +18,7 @@ files to copy into the PREFIX.
 
 if MSYS2 and SYSTEM_RUNTIME copy dll's etc to PKG_INSTALL_DIR
 
+Append version to package build path...Use PKG_SRC_DIR?
+
 Should a PKG_RELEASE be added to differentiate changes/fixes between
 builds?...probably.
