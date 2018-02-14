@@ -3,7 +3,7 @@
 function set_pkg_env
 {
 	PKG_NAME="gettext"
-	PKG_VERSION="0.19.8.1"
+	PKG_VERSION="0.19.7"
 
 	PKG_SRC_DIR="${PKG_NAME}-${PKG_VERSION}"
 	PKG_SRC_FILE="${PKG_SRC_DIR}.tar.xz"
@@ -12,4 +12,14 @@ function set_pkg_env
 	PKG_DEPS="libiconv"
 
 	PKG_BUILD_TOOL="autotools"
+}
+
+function configure
+{
+	cd "$PKG_BUILD_DIR" || exit 1
+
+	GETTEXT_ARG="--disable-java --disable-native-java --disable-csharp \
+	--enable-static --enable-threads=win32 --without-emacs --disable-openmp"
+
+	autotools_configure $GETTEXT_ARG
 }
