@@ -11,33 +11,38 @@ function set_pkg_env
 
 	PKG_DEPS="libsndfile"
 
-	PKG_BUILD_TOOL="autotools"
+	PKG_BUILD_TOOL="waf"
+}
+
+function prep
+{
+	default_prep || return 0
+
+	cp $ABUILD_PKG_DIRECTORY/vamp-plugin-sdk-2.5-pkgconfig.patch $PKG_BUILD_DIR
+	cp $ABUILD_PKG_DIRECTORY/vamp-plugin-sdk-2.5-waf $PKG_BUILD_DIR/waf
+	cp $ABUILD_PKG_DIRECTORY/vamp-plugin-sdk-2.5-wscript $PKG_BUILD_DIR/wscript
+
+	patch -p1 < vamp-plugin-sdk-2.5-pkgconfig.patch || exit 1
 }
 
 function configure
 {
 	cd "$PKG_BUILD_DIR" || exit 1
 
-if [ "$TOOLSET" = 'mingw' ]; then
-ed Makefile.in << EOF
-%s/= ar/= ${HOST_SYSTEM}-ar/
-%s/= ranlib/= ${HOST_SYSTEM}-ranlib/
-wq
-EOF
-ed pkgconfig/vamp-hostsdk.pc.in << EOF
-%s/-ldl//
-wq
-EOF
-fi
-
-	export CPPFLAGS="-D_GNU_SOURCE $CPPFLAGS"
-
-	autotools_configure
+	if [ "$TOOLSET" == 'mingw' ]; then
+		# trust that default build paths are correct
+		$PYTHON waf configure
+	fi
 }
 
-function build
+function install
 {
 	cd "$PKG_BUILD_DIR" || exit 1
 
-	make sdk $MAKE_VERBOSE_ARG $SMP_MAKEFLAGS
+	if [ "$TOOLSET" == 'mingw' ]; then
+		$PYTHON waf install
+
+		# Fix waf install
+		mv $PKG_BIN_DIR/libvamp*.dll.a $PKG_LIB_DIR
+	fi
 }
