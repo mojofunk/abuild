@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# return true if default_prep has already been run, which we
+# assume has happened if $PKG_BUILD_DIR exists
 function default_prep
 {
 	cd $PKG_BUILD_ROOT_DIR || exit 1
@@ -14,15 +16,18 @@ function default_prep
 		elif [ -n "${PKG_SRC_URL}" ]; then
 			download_source_and_unpack
 		fi
+		cd "$PKG_BUILD_DIR" || exit 1
+		return 0
+	else
+		cd "$PKG_BUILD_DIR" || exit 1
+		return 1
 	fi
-
-	cd "$PKG_BUILD_DIR" || exit 1
 }
 
 function prep
 {
 	echo "Package $ABUILD_PKG_NAME using default prep"
-	default_prep
+	default_prep || return 0
 }
 
 function default_configure
