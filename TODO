@@ -20,7 +20,19 @@ files to copy into the PREFIX.
 
 if MSYS2 and SYSTEM_RUNTIME copy dll's etc to PKG_INSTALL_DIR
 
-Append version to package build path...Use PKG_SRC_DIR?
+Append version to package build path...Use PKG_SRC_DIR? No, we want to
+be able to use the same name as the checkout dir so that
+PKG_BUILD_ROOT_DIR can be set in the environment to override and build
+a "development" version of the code temporarily. What is needed is a way
+to identify whether if a source directory already exists that it
+corresponds to the version of the package that we are building. I think
+a solution to this would be to touch a file like
+$PKG_BUILD_DIR/$PKG_NAME-$PKG_VERSION.abuild and then if any other
+.abuild files exist in the build directory then stop the build.
+
 
 Should a PKG_RELEASE be added to differentiate changes/fixes between
 builds?...probably.
+
+gettext-0.19.8.1 is broken for 32bit mingw builds, it fixed
+upstream(apparently) but no release yet.
