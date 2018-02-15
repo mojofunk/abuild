@@ -23,11 +23,24 @@ ed wscript << EOF
 wq
 EOF
 
+	AUBIO_COMMON_ARG="--notests --disable-jack --enable-fftw3f"
+
 	# --notests option doesn't seem to work and tests get executed
 	# regardless, which can be an issue if cross compiling.
 	if [ "$HOST_ARCH" == 'x86_64' ]; then
-		waf_configure "--notests --disable-jack --enable-fftw3f --with-target-platform=win64"
+		waf_configure "$AUBIO_COMMON_ARG --with-target-platform=win64"
 	else
-		waf_configure "--notests --disable-jack --enable-fftw3f --with-target-platform=win32"
+		waf_configure "$AUBIO_COMMON_ARG --with-target-platform=win32"
+	fi
+}
+
+function install
+{
+	cd "$PKG_BUILD_DIR" || exit 1
+
+	waf_install
+
+	if [ "$TOOLSET" == 'mingw' ]; then
+		mv $PREFIX/lib64/aubio*.dll.a $PKG_LIB_DIR
 	fi
 }
