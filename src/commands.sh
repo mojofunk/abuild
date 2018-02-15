@@ -15,6 +15,9 @@ function default_prep
 			fi
 		elif [ -n "${PKG_SRC_URL}" ]; then
 			download_source_and_unpack
+		else
+			# If all else fails just create the build directory
+			mkdir -p ${PKG_BUILD_DIR}
 		fi
 		cd "$PKG_BUILD_DIR" || exit 1
 		return 0
