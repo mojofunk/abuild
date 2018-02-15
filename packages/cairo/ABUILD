@@ -26,6 +26,7 @@ function configure
 	--enable-shared\
 	--enable-fc\
 	--enable-ft\
+	--enable-gobject\
 	"
 
 		autotools_configure $AUTOTOOLS_ARGS
