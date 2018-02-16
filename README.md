@@ -16,7 +16,7 @@ on windows.
 - Build from git repository, source tarball, or use existing system
   binaries.
 - Use bash shell script and python(No powershell)
-- Override Build directory with an environment avariable to be able to
+- Override Build directory with an environment variable to be able to
   use local checkout/extracted tarball/etc for development
 - Easily install into system locations, default install directory or
   specified path.
@@ -31,7 +31,7 @@ Each package will have a single common script for building all packages
 Each library has a script that defines prep/configure/build/install
 
 The packages are installed similar to mingw-pkg where the install root
-can be overidden for each dependency. When building the libraries the
+can be overridden for each dependency. When building the libraries the
 include/library and pkg-config path will need to be overridden.
 
 # System Setup
