@@ -29,7 +29,7 @@ function waf_set_env
 		LIBDIR_ARG="--libdir=${LIBDIR}"
 	fi
 
-	#PYTHON=python3
+	export PYTHON=${PYTHON:=python3}
 }
 
 function waf_configure
