@@ -30,9 +30,88 @@ a solution to this would be to touch a file like
 $PKG_BUILD_DIR/$PKG_NAME-$PKG_VERSION.abuild and then if any other
 .abuild files exist in the build directory then stop the build.
 
-
 Should a PKG_RELEASE be added to differentiate changes/fixes between
 builds?...probably.
 
 gettext-0.19.8.1 is broken for 32bit mingw builds, it fixed
 upstream(apparently) but no release yet.
+
+Should libsamplerate depend on fftw? what does it enable
+
+When building a package and the prefix path changes all deps should
+probably be uninstalled and rebuilt so that there are not issue with
+libtool and other changes that may cause problems. So on first build
+uninstall all package deps.
+
+Make clean command recursive with recursive flag
+
+Add removal of libtool files from the lib directory to autotools_install?
+
+Rename PKG_LIB_DIR/PKG_BIN_DIR/etc to LIBDIR/BINDIR/INCDIR/ETCDIR
+
+Use DESTDIR and PREFIX correctly
+
+Rename prep to prepare, none of the other commands are shortened...
+
+Add uninstall command
+
+Add ability for packages to set a list of runtime and devel file lists?
+and then recursively install just the runtime files to create smaller
+packages? or define DEVEL_FILES and then remove them from install dir?
+This is getting much closer to RPM...
+
+Add install-runtime and install-devel commands that take a list of
+runtime or devel files.
+
+Use standard MAKEFLAGS var instead of SMP_MAKEFLAGS
+
+Remove all libtool archives for windows builds
+
+When an abuild package is installed it must check if another version of
+the current package is already installed and perhaps remove it
+automatically or fail the install and make user do it?
+
+When a package is installed it should always be installed into a
+tmp destdir. Then files specified in PKG_FILES will be moved into
+$PKG_DESTDIR and PKG_DEVEL_FILES will be moved into $PKG_DESTDIR-devel
+and a list of files in each directory is written to a
+file. $PKG_NAME.$VERSION.abuild.files and
+$PKG_NAME.$VERSION-devel.abuild.files or something and these lists of
+files are used for uninstalling a package.
+
+e.g
+
+Build and install a package and all its dependencies into a destdir,
+specifying the -S flag with -D means that all package dependencies must
+be installed on the system, which will be checked via installed abuild
+files.
+
+-r (recursive)
+-D (destdir, no args as package name/version/compiler/host_arch etc used)
+-S (use system libs if installed, which will be copy into destdir because -r is specified)
+-t (toolset)
+
+./abuild.sh -r -D -S -t mingw install gtk2
+
+Build and install a package into system paths. All dependencies must be
+installed on the system and checked via pkg-config
+
+./abuild.sh -r -t mingw install gtk2
+
+Remove a package and all its dependencies from a system.
+
+./abuild.sh -r -t mingw uninstall gtk2
+
+Just remove a package from a system, and not its dependencies.
+
+./abuild.sh -t mingw uninstall gtk2
+
+Install a runtime package and all its dependencies into a destdir. This
+will only work if all the dependencies have been built and installed via
+abuild. So abuild must check that no files in the runtime/devel packages
+exist before building/installing of abuild package so that packages that
+have been installed via other methods (apt/yum/pacman) are not
+overwritten. Should not install to system paths if it isn't already
+installed.
+
+./abuild.sh -r -D -t mingw install-runtime gtk2
