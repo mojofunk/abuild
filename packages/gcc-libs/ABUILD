@@ -1,0 +1,65 @@
+#!/bin/bash
+
+GCC_COMMON_DLLS='
+libstdc++-6.dll
+libwinpthread-1.dll
+'
+
+GCC_FEDORA_WIN32_DLLS='
+libgcc_s_sjlj-1.dll
+'
+
+GCC_FEDORA_WIN64_DLLS='
+libgcc_s_seh-1.dll
+'
+
+GCC_MSYS2_DLLS='
+libgcc_s_dw2-1.dll
+libgmp-10.dll
+'
+
+function set_pkg_env
+{
+	PKG_NAME="gcc-libs"
+	PKG_VERSION="4.9.3"
+
+	PKG_SRC_DIR="${PKG_NAME}-${PKG_VERSION}"
+
+	PKG_BUILD_TOOL="none"
+}
+
+function install
+{
+	cd "$PKG_BUILD_DIR" || exit 1
+
+	if [ "$TOOLSET" != "mingw" ]; then
+		return 0
+	fi
+
+	if [ "$BUILD_HOST" == 'MSYS2' ]; then
+		DLLS=$GCC_MSYS2_DLLS
+	else
+		# TODO
+		if [ "$ARCH" == "x86_64" ]; then
+			DLLS=$GCC_FEDORA_WIN64_DLLS
+		else
+			DLLS=$GCC_FEDORA_WIN32_DLLS
+		fi
+	fi
+
+	if [ -z "$DLLS" ]; then
+		echo "ERROR: DLLS variable is not defined..."
+		exit 1
+	fi
+
+	DLLS=$GCC_COMMON_DLLS$DLLS
+
+	mkdir -p $PKG_BIN_DIR || exit 1
+
+	echo "Copying $PKG_NAME shared libraries to $PKG_BIN_DIR ..."
+
+	for i in $DLLS;
+	do
+		mingw_copydll "$i" $PKG_BIN_DIR || exit 1
+	done
+}
