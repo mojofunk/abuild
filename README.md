@@ -34,6 +34,11 @@ The packages are installed similar to mingw-pkg where the install root
 can be overridden for each dependency. When building the libraries the
 include/library and pkg-config path will need to be overridden.
 
+This tool should probably be written in python rather than bash but that
+would take time and skills and as bash is pretty common these days I'm
+not going to change it. And perhaps it is the best choice anyway...hard
+to know.
+
 # System Setup
 
 The script will determine the build system and dependent on the build
