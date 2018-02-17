@@ -15,6 +15,10 @@ prefix PKG_CONFIG_PATH and PKG_CONFIG_LIBDIR?
 
 Add argument to prefer checkout over release
 
+Rename ABUILD_PKG_DIRECTORY to ABUILD_PKG_DIR
+
+Add ABUILD_PKG_ROOT_DIR env var
+
 Where we want to use binary versions, specify a list of the runtime
 files to copy into the PREFIX.
 
