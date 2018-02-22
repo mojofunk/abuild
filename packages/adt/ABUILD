@@ -1,0 +1,36 @@
+#!/bin/bash
+
+function set_pkg_env
+{
+	PKG_NAME='adt'
+	PKG_VERSION='0.1.0'
+	PKG_REPO="https://gitlab.com/mojofunk/adt.git"
+
+	PKG_DEPS='cppunit'
+
+	PKG_BUILD_TOOL='waf'
+}
+
+function configure {
+	cd "$PKG_BUILD_DIR" || exit 1
+
+	TEST_ARGS="--with-tests"
+
+	waf_configure "$TEST_ARGS"
+}
+
+function build {
+	cd "$PKG_BUILD_DIR" || exit 1
+
+	# --notests means don't run the tests after the build
+	waf_build "--notests"
+}
+
+function install {
+	cd "$PKG_BUILD_DIR" || exit 1
+
+	waf_install
+
+	# Only relevant with msvc build
+	mv "$PKG_LIB_DIR"/adt*.dll $PKG_BIN_DIR
+}
