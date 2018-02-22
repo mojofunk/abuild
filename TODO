@@ -47,6 +47,9 @@ probably be uninstalled and rebuilt so that there are not issue with
 libtool and other changes that may cause problems. So on first build
 uninstall all package deps.
 
+In MSYS2 shells the arch flags won't work so check if it specified
+correctly and if not print and error and exit
+
 Make clean command recursive with recursive flag
 
 Add removal of libtool files from the lib directory to autotools_install?
