@@ -21,5 +21,7 @@ function configure
 	GETTEXT_ARG="--disable-java --disable-native-java --disable-csharp \
 	--enable-static --enable-threads=win32 --without-emacs --disable-openmp"
 
-	autotools_configure $GETTEXT_ARG
+	# Won't compile with -O0, likely fixed in newer releases but they have
+	# other build issues atm.
+	CFLAGS="$CFLAGS -O2" CXXFLAGS="$CXXFLAGS -O2" autotools_configure $GETTEXT_ARG
 }
