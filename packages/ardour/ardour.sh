@@ -107,11 +107,19 @@ function ardour_post_install
 	mv "$PKG_LIB_DIR/$ARDOUR_DATA_DIRNAME"/*.dll "$PKG_BIN_DIR"
 	mv "$PKG_LIB_DIR/$ARDOUR_DATA_DIRNAME"/*.exe $PKG_BIN_DIR
 
+	GTK_ENGINE_DIR="$PKG_LIB_DIR/gtk-2.0/engines"
+
+	echo "Moving clearlooks dll to $GTK_ENGINE_DIR ..."
+
+	mkdir "$GTK_ENGINE_DIR"
+
+	mv "$PKG_LIB_DIR/$ARDOUR_DATA_DIRNAME/engines/clearlooks.dll" "$GTK_ENGINE_DIR/libclearlooks.la"
+
 	echo "Overwriting icon files ..."
 
 	cp "$PKG_BUILD_DIR/gtk2_ardour/icons/cursor_square/"* "$ARDOUR_DATA_DIR/icons/"
 
-	echo "Deleting import libs ..."
+	#echo "Deleting import libs ..."
 
 	#rm "$PKG_LIB_DIR"/*dll.a
 
@@ -120,6 +128,7 @@ function ardour_post_install
 	EXEC_SCRIPT="$PKG_LIB_DIR/$ARDOUR_PRODUCT_NAME$MAJOR_VERSION"
 
 	if [ -f $EXEC_SCRIPT ]; then
+		echo "Deleting $EXEC_SCRIPT ..."
 		rm $EXEC_SCRIPT || exit 1
 	fi
 }
