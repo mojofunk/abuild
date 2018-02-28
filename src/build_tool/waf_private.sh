@@ -39,7 +39,7 @@ function waf_configure
 
 function waf_build
 {
-	$PYTHON waf ${PKG_VERBOSE_OPTION} build $SMP_MAKEFLAGS ${1}
+	$PYTHON waf ${PKG_VERBOSE_OPTION} build $MAKEFLAGS ${1}
 }
 
 function waf_install

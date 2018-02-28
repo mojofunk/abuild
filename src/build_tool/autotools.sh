@@ -27,7 +27,7 @@ function autotools_configure
 
 function autotools_build
 {
-	make $MAKE_VERBOSE_ARG $SMP_MAKEFLAGS
+	make $MAKE_VERBOSE_ARG $MAKEFLAGS
 }
 
 function autotools_install

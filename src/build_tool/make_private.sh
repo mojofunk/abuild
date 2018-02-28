@@ -4,5 +4,5 @@ function make_set_env
 		MAKE_VERBOSE_ARG="VERBOSE=1"
 	fi
 
-	: ${SMP_MAKEFLAGS:="-j4"}
+	: ${MAKEFLAGS:="-j4"}
 }

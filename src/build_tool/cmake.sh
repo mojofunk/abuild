@@ -41,7 +41,7 @@ function cmake_configure
 function cmake_build
 {
 	cd "$PKG_BUILD_DIR" || exit 1
-	cd $CMAKE_BUILD_DIR && make $MAKE_VERBOSE_ARG $SMP_MAKEFLAGS
+	cd $CMAKE_BUILD_DIR && make $MAKE_VERBOSE_ARG $MAKEFLAGS
 	cd -
 }
 

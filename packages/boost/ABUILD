@@ -31,7 +31,7 @@ function build
 {
 	cd "$PKG_BUILD_DIR" || exit 1
 
-	: ${SMP_MAKEFLAGS:="-j4"}
+	: ${MAKEFLAGS:="-j4"}
 
 	#-d+2 -q pch=off -q --build-dir=serial
 	B2_COMMON_ARGS="--layout=tagged --without-mpi --without-graph_parallel \
@@ -50,7 +50,7 @@ function build
 
 	B2_ALL_COMMON_ARGS="$B2_COMMON_ARGS $B2_VARIANT_ARG $B2_TARGET_OS_ARG $B2_DEBUG_SYMBOLS_ARG"
 
-	./b2 $B2_ALL_COMMON_ARGS $SMP_MAKEFLAGS --user-config=user-config.jam stage \
+	./b2 $B2_ALL_COMMON_ARGS $MAKEFLAGS --user-config=user-config.jam stage \
 	|| echo "Boost build only partly successful"
 }
 

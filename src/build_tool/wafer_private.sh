@@ -13,7 +13,7 @@ function wafer_configure
 
 function wafer_build
 {
-	$PYTHON wafer ${PKG_VERBOSE_OPTION} build $SMP_MAKEFLAGS ${1}
+	$PYTHON wafer ${PKG_VERBOSE_OPTION} build $MAKEFLAGS ${1}
 }
 
 function wafer_install
