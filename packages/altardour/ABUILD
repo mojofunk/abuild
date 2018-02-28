@@ -30,7 +30,7 @@ function configure
 
 	altardour_set_env
 
-	$PYTHON waf configure --bindir=/lib --amalgamate \
+	$PYTHON waf configure --bindir=/lib --amalgamate --dev-tools \
 	$ARDOUR_COMMON_ARG $ARDOUR_PATH_ARG $ARDOUR_TEST_ARG \
 	$ARDOUR_BACKEND_ARG $ARDOUR_BUILD_ARG || exit 1
 }
