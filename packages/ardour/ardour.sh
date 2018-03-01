@@ -91,6 +91,8 @@ function ardour_set_env
 		else
 			: ${ARDOUR_BACKEND_ARG:="--with-backends=portaudio"}
 		fi
+		CFLAGS="$CFLAGS -Og"
+		CXXFLAGS=$CFLAGS
 	else
 		if [ "$PKG_DEBUG_ENABLE" ]; then
 			: ${ARDOUR_BACKEND_ARG:="--with-backends=alsa,jack,dummy"}
