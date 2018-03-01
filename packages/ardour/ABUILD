@@ -28,8 +28,6 @@ function install
 {
 	cd "$PKG_BUILD_DIR" || exit 1
 
-	ardour_set_env
-
 	waf_install
 
 	ardour_post_install
