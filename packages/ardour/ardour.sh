@@ -83,7 +83,7 @@ function ardour_set_env
 
 	: ${ARDOUR_COMMON_ARG:="$VST_ARG $DIST_TARGET_ARG $ARDOUR_PROGRAM_NAME_ARG --cxx11"}
 
-	: ${ARDOUR_PATH_ARG:="--prefix=/ --configdir=/share"}
+	: ${ARDOUR_PATH_ARG:="--prefix=$PREFIX --configdir=$PREFIX/share"}
 
 	if [ "$TOOLSET" == "mingw" ]; then
 		if [ "$PKG_DEBUG_ENABLE" ]; then
