@@ -113,7 +113,7 @@ function ardour_post_install
 
 	echo "Moving clearlooks dll to $GTK_ENGINE_DIR ..."
 
-	mkdir "$GTK_ENGINE_DIR"
+	mkdir -p "$GTK_ENGINE_DIR"
 
 	mv "$PKG_LIB_DIR/$ARDOUR_DATA_DIRNAME/engines/clearlooks.dll" "$GTK_ENGINE_DIR/libclearlooks.la"
 
