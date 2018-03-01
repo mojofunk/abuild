@@ -109,13 +109,11 @@ function ardour_post_install
 	mv "$PKG_LIB_DIR/$ARDOUR_DATA_DIRNAME"/*.dll "$PKG_BIN_DIR"
 	mv "$PKG_LIB_DIR/$ARDOUR_DATA_DIRNAME"/*.exe $PKG_BIN_DIR
 
-	GTK_ENGINE_DIR="$PKG_LIB_DIR/gtk-2.0/engines"
+	GTK_ENGINE_DIR="$PKG_LIB_DIR/gtk-2.0/2.10.0/engines"
 
 	echo "Moving clearlooks dll to $GTK_ENGINE_DIR ..."
 
-	mkdir -p "$GTK_ENGINE_DIR"
-
-	mv "$PKG_LIB_DIR/$ARDOUR_DATA_DIRNAME/engines/clearlooks.dll" "$GTK_ENGINE_DIR/libclearlooks.la"
+	mv "$PKG_LIB_DIR/$ARDOUR_DATA_DIRNAME/engines/clearlooks.dll" "$GTK_ENGINE_DIR/libclearlooks.dll"
 
 	echo "Overwriting icon files ..."
 
