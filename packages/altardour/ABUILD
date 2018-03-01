@@ -30,7 +30,7 @@ function configure
 
 	altardour_set_env
 
-	$PYTHON waf configure --bindir=/lib --amalgamate --dev-tools \
+	$PYTHON waf configure --bindir="$PREFIX/lib" --amalgamate --dev-tools \
 	$ARDOUR_COMMON_ARG $ARDOUR_PATH_ARG $ARDOUR_TEST_ARG \
 	$ARDOUR_BACKEND_ARG $ARDOUR_BUILD_ARG || exit 1
 }
@@ -39,9 +39,7 @@ function install
 {
 	cd "$PKG_BUILD_DIR" || exit 1
 
-	altardour_set_env
-
-	$PYTHON waf install --destdir="${PKG_INSTALL_DIR}"
+	waf_install
 
 	ardour_post_install
 }
