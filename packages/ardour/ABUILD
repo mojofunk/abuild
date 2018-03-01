@@ -20,7 +20,7 @@ function configure
 	ardour_set_env
 
 	waf_configure "$ARDOUR_COMMON_ARG $ARDOUR_PATH_ARG $ARDOUR_TEST_ARG \
-	              $ARDOUR_BACKEND_ARG $ARDOUR_BUILD_ARG" || exit 1
+	              $ARDOUR_BACKEND_ARG $ARDOUR_BUILD_ARG --keepflags" || exit 1
 
 }
 
