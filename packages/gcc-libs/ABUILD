@@ -39,8 +39,7 @@ function install
 	if [ "$BUILD_HOST" == 'MSYS2' ]; then
 		DLLS=$GCC_MSYS2_DLLS
 	else
-		# TODO
-		if [ "$ARCH" == "x86_64" ]; then
+		if [ "$HOST_ARCH" == "x86_64" ]; then
 			DLLS=$GCC_FEDORA_WIN64_DLLS
 		else
 			DLLS=$GCC_FEDORA_WIN32_DLLS
