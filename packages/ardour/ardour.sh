@@ -72,7 +72,7 @@ function ardour_set_env
 		VST_ARG="--windows-vst"
 	fi
 
-	if [ "$PKG_ENABLE_DEBUG" ]; then
+	if [ "$PKG_DEBUG_ENABLE" ]; then
 		ARDOUR_BUILD_ARG="--debug --backtrace --debug-symbols"
 		#ARDOUR_TEST_ARG="--test --single-tests"
 	else
@@ -86,13 +86,13 @@ function ardour_set_env
 	: ${ARDOUR_PATH_ARG:="--prefix=/ --configdir=/share"}
 
 	if [ "$TOOLSET" == "mingw" ]; then
-		if [ "$PKG_ENABLE_DEBUG" ]; then
+		if [ "$PKG_DEBUG_ENABLE" ]; then
 			: ${ARDOUR_BACKEND_ARG:="--with-backends=portaudio,dummy"}
 		else
 			: ${ARDOUR_BACKEND_ARG:="--with-backends=portaudio"}
 		fi
 	else
-		if [ "$PKG_ENABLE_DEBUG" ]; then
+		if [ "$PKG_DEBUG_ENABLE" ]; then
 			: ${ARDOUR_BACKEND_ARG:="--with-backends=alsa,jack,dummy"}
 		else
 			: ${ARDOUR_BACKEND_ARG:="--with-backends=alsa,jack"}
