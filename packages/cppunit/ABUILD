@@ -16,6 +16,11 @@ function install {
 
 	mkdir -p "$PKG_BIN_DIR" || exit 1
 
-	# Only relevant with msvc build
-	mv "$PKG_LIB_DIR"/cppunit*.dll $PKG_BIN_DIR
+	if [ "$TOOLSET" == 'msvc' ]; then
+		mv "$PKG_LIB_DIR"/cppunit*.dll $PKG_BIN_DIR
+	fi
+
+	if [ "$TOOLSET" == 'mingw' ]; then
+		mv $PREFIX/lib64/cppunit*.dll.a $PKG_LIB_DIR
+	fi
 }
