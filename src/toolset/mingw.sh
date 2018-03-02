@@ -14,7 +14,7 @@ function set_mingw_default_build_env
 		fi
 	fi
 
-	export CPPFLAGS="-I${PREFIX}/include $CPPFLAGS"
+	export CPPFLAGS="-I${PREFIX}/include ${CPPFLAGS}"
 	export CFLAGS="-I${PREFIX}/include ${GLOBAL_CFLAGS} -mstackrealign ${CFLAGS}"
 	export CXXFLAGS="-I${PREFIX}/include ${GLOBAL_CFLAGS} -mstackrealign ${CXXFLAGS}"
 	export LDFLAGS="-L${PREFIX}/lib ${LDFLAGS}"
