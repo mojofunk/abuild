@@ -1,11 +1,11 @@
-Add an PKG_RELEASE environment variable and use it in install package
-name
 
 Instead of touching a file in the root directory to indicate a package
 has been installed, add a directory to
 $INSTALL_PATH/share/abuild/$PKG_NAME and then add the ABUILD file used
 to build the package and possibly add an ACONFIG file that contains the
 environment variables used for the build
+
+or $INSTALL_PATH/share/abuild/$APKG_NAME/ABUILD/ABUILDFILES
 
 Add argument to not process dependencies, or don't process deps by
 default and add a -r(recursive) argument.
@@ -14,6 +14,11 @@ Add argument to link to system libs(via pkg-config) if installed or just
 prefix PKG_CONFIG_PATH and PKG_CONFIG_LIBDIR?
 
 Add argument to prefer checkout over release
+
+Replace debug -d option with build type option:
+	-b debug
+	-b debug-optimized
+	-b release
 
 Rename ABUILD_PKG_DIRECTORY to ABUILD_PKG_DIR
 
@@ -36,6 +41,8 @@ $PKG_BUILD_DIR/$PKG_NAME-$PKG_VERSION.abuild and then if any other
 
 Should a PKG_RELEASE be added to differentiate changes/fixes between
 builds?...probably.
+
+Move boost dll's from $INSTALL_DIR/lib to bin
 
 gettext-0.19.8.1 is broken for 32bit mingw builds, it fixed
 upstream(apparently) but no release yet.
@@ -69,8 +76,6 @@ This is getting much closer to RPM...
 
 Add install-runtime and install-devel commands that take a list of
 runtime or devel files.
-
-Use standard MAKEFLAGS var instead of SMP_MAKEFLAGS
 
 Remove all libtool archives for windows builds
 
